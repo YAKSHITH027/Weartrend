@@ -4,6 +4,8 @@ import { AddIcon } from "@chakra-ui/icons";
 import Footer from "./Footer";
 import Home from "../Pages/Home";
 import MegaMenu from "./MegaMenu";
+import { FaShoppingCart } from "react-icons/fa";
+import InputSearch from "./InputSearch";
 const Navbar = () => {
   return (
     <Box maxWidth={"100%"} m="auto" bg={"white"}>
@@ -14,7 +16,7 @@ const Navbar = () => {
           borderBottom="1px solid grey"
           bg={"white"}
           position="relative"
-          zIndex={1100}
+          zIndex={0}
         >
           <Flex fontSize="1.1rem" mr="0.7rem">
             <Spacer />
@@ -41,42 +43,8 @@ const Navbar = () => {
             />
           </Box>
           <Flex align={"center"} pos={"relative"}>
-            <Flex
-              width="10rem"
-              height={"100%"}
-              _hover={{ width: "29rem" }}
-              bg={"white"}
-              transition="all 0.5s"
-              pos="absolute"
-              zIndex={10}
-              top={"0rem"}
-              right={"6rem"}
-              // paddingTop="2.5rem"
-              // paddingBottom={"3rem"}
-              alignItems="center"
-            >
-              <Input
-                placeholder="search"
-                width={"100%"}
-                p="5px 1rem"
-                border={"none"}
-                outline={"none"}
-                borderBottom="1px solid"
-              />
-              <Flex
-                flexDirection={"column"}
-                pos="absolute"
-                top={"4rem"}
-                bg="white"
-                width={"100%"}
-              >
-                <Text>hello there</Text>
-                <Text>hello there</Text>
-                <Text>hello there</Text>
-                <Text>hello there</Text>
-              </Flex>
-            </Flex>
-            <AddIcon mr={"2rem"} />
+            <InputSearch />
+            <FaShoppingCart fontSize={"1.6rem"} />
           </Flex>
         </Flex>
         <MegaMenu />
@@ -86,13 +54,11 @@ const Navbar = () => {
           left={"0"}
           width="100vw"
           height={"100vh"}
-          zIndex={-9}
-          backgroundColor={"black"}
+          zIndex={-1}
+          // backgroundColor={"black"}
           opacity="0.5"
         ></Box>
       </Box>
-      <Home />
-      {/* <Footer /> */}
     </Box>
   );
 };

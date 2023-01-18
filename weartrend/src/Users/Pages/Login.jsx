@@ -43,9 +43,9 @@ const Login = () => {
         </form>
         <Text mt={4}>
           don't have an account?{" "}
-          {/* <Link to={"/register"} color="teal.500" as={RouterLink}>
+          <Link to={"/register"} color="teal.500" as={RouterLink}>
             register
-          </Link>{" "} */}
+          </Link>{" "}
           instead
         </Text>
       </Box>
