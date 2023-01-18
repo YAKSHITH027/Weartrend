@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  Box,
-  Flex,
-  Spacer,
-  Input,
-  Image,
-  Text,
-  Heading,
-} from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { Box, Flex, Image, Heading } from "@chakra-ui/react";
+
 import SimpleSlider from "../Components/Caroseal";
 import { autoImage } from "../utils";
 import ProductSlider from "../Components/ProductSlider";
-import Footer from "../Components/Footer";
+
 const Home = () => {
   //   console.log(autoImage);
   return (
@@ -63,7 +55,6 @@ const Home = () => {
           width={"100%"}
         />
       </Box>
-      <Footer />
     </Box>
   );
 };
