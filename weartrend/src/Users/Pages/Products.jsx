@@ -1,8 +1,9 @@
-import { Box, Container, Flex, Grid } from "@chakra-ui/react";
+import { Badge, Box, Container, Flex, Grid, Heading } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Filter from "../Components/Filter";
 import Loading from "../Components/Loading";
+import Navbar from "../Components/Navbar";
 import SingleProd from "../Components/SingleProd";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
 
@@ -30,24 +31,47 @@ const Products = () => {
     getProduct(param.category);
   }, [param.category]);
   if (isLoading) return <Loading />;
+  if (state.products.length == 0) return "no match found";
   return (
-    <Flex minHeight={"100vh"} justifyContent="space-around">
-      <Flex w="20%">
-        <Filter />
+    <Box>
+      <Navbar />
+      <Flex minH={"100vh"} justifyContent="space-around" marginTop={"1rem"}>
+        <Flex
+          width={"24%"}
+          flexDirection={"column"}
+          align="center"
+          border={"2px solid red"}
+          h="90vh"
+        >
+          <Badge
+            variant={"outline"}
+            fontSize={"1.7rem"}
+            colorScheme={"green"}
+            px="2rem"
+          >
+            filters
+          </Badge>
+          <Filter />
+        </Flex>
+        <Grid
+          width={"72%"}
+          // height={"90vh"}
+          border="2px solid green"
+          templateColumns={{
+            base: "repeat(1, 1fr)",
+            sm: "repeat(2, 1fr)",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(4, 1fr)",
+          }}
+          gap={4}
+          padding="2"
+        >
+          {state.products?.map((item, index) => {
+            return <SingleProd key={item.id} prodData={item} />;
+          })}
+        </Grid>
       </Flex>
-      <Grid
-        width={"75%"}
-        height={"100%"}
-        bg="darkcyan"
-        templateColumns="repeat(4, 1fr)"
-        gap={4}
-        padding="2"
-      >
-        {state.products?.map((item, index) => {
-          return <SingleProd key={item.id} prodData={item} />;
-        })}
-      </Grid>
-    </Flex>
+    </Box>
   );
 };
 
