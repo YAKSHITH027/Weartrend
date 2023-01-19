@@ -15,7 +15,7 @@ const Products = () => {
     setLoading(true);
     try {
       let res = await fetch(
-        `https://backend-3ayp.onrender.com/product?category=${category}`
+        `https://backend-3ayp.onrender.com/product?category=${category}&_limit=12&_page=1`
       );
       let data = await res.json();
       console.log("done");
@@ -37,7 +37,7 @@ const Products = () => {
       <Navbar />
       <Flex minH={"100vh"} justifyContent="space-around" marginTop={"1rem"}>
         <Flex
-          width={"24%"}
+          width={"20%"}
           flexDirection={"column"}
           align="center"
           border={"2px solid red"}
@@ -54,8 +54,8 @@ const Products = () => {
           <Filter />
         </Flex>
         <Grid
-          width={"72%"}
-          // height={"90vh"}
+          width={"70%"}
+          height={"90vh"}
           border="2px solid green"
           templateColumns={{
             base: "repeat(1, 1fr)",
@@ -63,7 +63,8 @@ const Products = () => {
             md: "repeat(3, 1fr)",
             lg: "repeat(4, 1fr)",
           }}
-          gap={4}
+          gap={2}
+          overflowY="scroll"
           padding="2"
         >
           {state.products?.map((item, index) => {

@@ -16,7 +16,7 @@ const InputSearch = () => {
         pos="absolute"
         zIndex={0}
         top={"0rem"}
-        right={"6rem"}
+        right={"17rem"}
         // paddingTop="2.5rem"
         // paddingBottom={"3rem"}
         alignItems="center"

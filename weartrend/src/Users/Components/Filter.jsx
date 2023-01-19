@@ -48,10 +48,10 @@ const Filter = () => {
           value={rate}
         >
           <Stack direction="column">
-            <Radio value="1">low-to-high</Radio>
-            <Radio value="2">highlow-to-</Radio>
-            <Radio value="3">highlow-to-</Radio>
-            <Radio value="4">highlow-to-</Radio>
+            <Radio value="1">2 & above</Radio>
+            <Radio value="2">3 & above</Radio>
+            <Radio value="3">4 & above</Radio>
+            <Radio value="4">only 5</Radio>
           </Stack>
         </RadioGroup>
       </Box>

@@ -50,7 +50,7 @@ const SingleProduct = () => {
   console.log(id);
   if (isLoading) return <Loading />;
   return (
-    <Box>
+    <Box maxW={"100vw"}>
       <Navbar />
       <Flex
         justifyContent="center"

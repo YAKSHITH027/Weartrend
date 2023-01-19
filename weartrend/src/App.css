@@ -19,3 +19,7 @@
   background-color: black !important;
   border-radius: 50%;
 }
+.strict {
+  /* width: 90vw !important; */
+  /* overflow: hidden; */
+}
