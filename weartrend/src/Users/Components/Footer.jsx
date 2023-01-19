@@ -8,6 +8,7 @@ import {
   Flex,
   Tag,
   useColorModeValue,
+  Image,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
@@ -63,7 +64,7 @@ export default function Footer() {
           </Stack>
         </SimpleGrid>
       </Container>
-      <Box py={10}>
+      <Box py={4}>
         <Flex
           align={"center"}
           _before={{
@@ -81,7 +82,10 @@ export default function Footer() {
             ml: 8,
           }}
         >
-          <Logo />
+          <Image
+            src="https://i.ibb.co/Rgqq7D2/WEARTREND-1-removebg-preview.png"
+            h={"2.8rem"}
+          />
         </Flex>
         <Text pt={6} fontSize={"sm"} textAlign={"center"}>
           © Built by Yakshith . All rights reserved
@@ -96,7 +100,7 @@ const Logo = (props) => {
     <svg
       height={32}
       viewBox="0 0 120 28"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://i.ibb.co/Rgqq7D2/WEARTREND-1-removebg-preview.png"
       {...props}
     >
       <path

@@ -36,11 +36,11 @@ const SingleProduct = () => {
       console.log(error);
     }
   };
+  const { id } = useParams();
   useEffect(() => {
     getProduct(id);
-  }, []);
+  }, [id]);
 
-  const { id } = useParams();
   console.log(id);
   if (isLoading) return <Loading />;
   return (
@@ -54,18 +54,23 @@ const SingleProduct = () => {
           padding={"1rem"}
           justifyContent="center"
           mx="2rem"
-          height={"80vh"}
+          height={"100vh"}
           borderWidth={"2px"}
         >
           <Image src={singleData.image} height={"90%"} borderWidth="3px" />
         </Flex>
         <Box
           height={{ sm: "auto", md: "100vh" }}
-          overflowY={{ base: "visible", md: "scroll" }}
+          overflowY="scroll"
           width={{ base: "full", md: "50%" }}
           padding={"2rem"}
           borderWidth="1px"
           paddingBottom={"8rem"}
+          sx={{
+            "::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
         >
           <Heading py={"1rem"}>{singleData.brand}</Heading>
           <Text paddingBottom={"0.54rem"}>{singleData.title}</Text>
@@ -132,33 +137,33 @@ const SingleProduct = () => {
               </ListItem>
             </UnorderedList>
           </Box>
-          <Box py="1rem" mt={"2rem"}>
-            <Accordion defaultIndex={[0]} allowMultiple>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box as="span" flex="1" textAlign="left">
-                      PRODUCT DETAILS
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <UnorderedList>
-                    <ListItem>
-                      Fits true to size, order your normal size
-                    </ListItem>
-                    <ListItem>Designed for a regular fit</ListItem>
-                    <ListItem>Integer molestie lorem at massa</ListItem>
-                    <ListItem>
-                      Model measurements: 6'2" height, 38" chest, 30" waist, 34"
-                      inseam, wearing a size medium
-                    </ListItem>
-                  </UnorderedList>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          </Box>
+
+          <Accordion defaultIndex={[0]} allowMultiple>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box as="span" flex="1" textAlign="left">
+                    Product details
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Laudantium, nulla? Perferendis, laborum.sdfljf dsdfs
+                {/* <UnorderedList>
+                  <ListItem>Fits true to size, order your normal size</ListItem>
+                  <ListItem>Designed for a regular fit</ListItem>
+                  <ListItem>Integer molestie lorem at massa</ListItem>
+                  <ListItem>
+                    Model measurements: 6'2" height, 38" chest, 30" waist, 34"
+                    inseam, wearing a size medium
+                  </ListItem>
+                </UnorderedList> */}
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+
           <Box py="1rem" mt={"2rem"}>
             <Accordion defaultIndex={[0]} allowMultiple>
               <AccordionItem>
