@@ -1,21 +1,16 @@
-import React from "react";
-import {
-  Box,
-  Flex,
-  Spacer,
-  Input,
-  Image,
-  Text,
-  Show,
-  Hide,
-} from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
-import Footer from "./Footer";
-import Home from "../Pages/Home";
+import React, { useContext } from "react";
+import { Box, Flex, Spacer, Image, Hide, Text } from "@chakra-ui/react";
+
 import MegaMenu from "./MegaMenu";
 import { FaShoppingCart } from "react-icons/fa";
 import InputSearch from "./InputSearch";
+import { Link, NavLink } from "react-router-dom";
+import { ProductContext } from "../Context/ProductContext/ProductContext";
 const Navbar = () => {
+  const {
+    state: { cart },
+  } = useContext(ProductContext);
+
   return (
     <Box maxWidth={"100%"} m="auto" bg={"white"}>
       <Box width={"100%"} m="auto">
@@ -53,6 +48,8 @@ const Navbar = () => {
               w="100%"
             />
           </Box>
+          <Link to="/products/mens">mens</Link>
+          {/* <NavLink to={"/register"}>register</NavLink> */}
           <Flex
             align={"center"}
             pos={"relative"}
@@ -62,7 +59,17 @@ const Navbar = () => {
             <Hide below="md">
               <InputSearch />
             </Hide>
-            <FaShoppingCart fontSize={"1.6rem"} />
+            <Flex
+              // border={"1px solid black"}
+              padding="0.3rem"
+              pos={"relative"}
+              paddingRight="0.7rem"
+            >
+              <FaShoppingCart fontSize={"1.6rem"} />
+              <Text pos="absolute" top="1px" right="1px">
+                {cart.length == 0 ? null : cart.length}
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
         <MegaMenu />
@@ -72,7 +79,7 @@ const Navbar = () => {
           left={"0"}
           width="100vw"
           height={"100vh"}
-          // zIndex={19}
+          zIndex={-19}
           // backgroundColor={"black"}
           opacity="0.5"
         ></Box>

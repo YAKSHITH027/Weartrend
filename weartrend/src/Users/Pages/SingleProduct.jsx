@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   Badge,
   Box,
+  Button,
   Center,
   Flex,
   Heading,
@@ -18,11 +19,15 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Footer from "../Components/Footer";
 import Loading from "../Components/Loading";
+import Navbar from "../Components/Navbar";
+import { ProductContext } from "../Context/ProductContext/ProductContext";
 
 const SingleProduct = () => {
   const [singleData, setSingleData] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const { state, dispatch, addCart } = useContext(ProductContext);
   let getProduct = async (id) => {
     setLoading(true);
     try {
@@ -36,15 +41,17 @@ const SingleProduct = () => {
       console.log(error);
     }
   };
+
   const { id } = useParams();
   useEffect(() => {
     getProduct(id);
   }, [id]);
-
+  console.log("statess", state);
   console.log(id);
   if (isLoading) return <Loading />;
   return (
     <Box>
+      <Navbar />
       <Flex
         justifyContent="center"
         flexDirection={{ base: "column", md: "row" }}
@@ -125,7 +132,22 @@ const SingleProduct = () => {
               xll
             </Center>
           </Flex>
-          <Box borderBottom={"1px solid grey"} py="1rem" mt={"2rem"}>
+          <Button
+            mt={"1rem"}
+            width={"50%"}
+            display={"flex"}
+            justifyContent="center"
+            colorScheme="orange"
+            isLoading={state.isLoading}
+            loadingText="Adding To The Cart"
+            onClick={() => {
+              addCart(singleData);
+              dispatch({ type: "ADD_TO_CART", payload: singleData });
+            }}
+          >
+            Add To Cart
+          </Button>
+          <Box borderBottom={"1px solid grey"} py="1rem" mt={"1rem"}>
             <Heading fontSize={"1.1rem"}>size and fit</Heading>
             <UnorderedList>
               <ListItem>Fits true to size, order your normal size</ListItem>
@@ -149,9 +171,7 @@ const SingleProduct = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laudantium, nulla? Perferendis, laborum.sdfljf dsdfs
-                {/* <UnorderedList>
+                <UnorderedList>
                   <ListItem>Fits true to size, order your normal size</ListItem>
                   <ListItem>Designed for a regular fit</ListItem>
                   <ListItem>Integer molestie lorem at massa</ListItem>
@@ -159,7 +179,7 @@ const SingleProduct = () => {
                     Model measurements: 6'2" height, 38" chest, 30" waist, 34"
                     inseam, wearing a size medium
                   </ListItem>
-                </UnorderedList> */}
+                </UnorderedList>
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
@@ -189,9 +209,10 @@ const SingleProduct = () => {
           </Box>
         </Box>
       </Flex>
-      <Box h={"12rem"} bg="darkcyan">
+      <Box h={"12rem"} bg="darkcyan" my={"2rem"}>
         Reviews
       </Box>
+      <Footer />
     </Box>
   );
 };
