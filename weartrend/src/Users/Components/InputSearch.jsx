@@ -1,5 +1,5 @@
 import { Search2Icon } from "@chakra-ui/icons";
-import { Box, Flex, Input, Text } from "@chakra-ui/react";
+import { Flex, Input, Text } from "@chakra-ui/react";
 import React, { useRef } from "react";
 
 const InputSearch = () => {

@@ -27,7 +27,7 @@ const Navbar = () => {
           position="relative"
           zIndex={0}
         >
-          <Flex fontSize="1.1rem" mr="0.7rem">
+          <Flex fontSize="1rem" mr="0.7rem" color={"gray.600"}>
             <Spacer />
             <Box px="6px" borderRight="1px solid black">
               stores and events
