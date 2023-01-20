@@ -38,7 +38,7 @@ const Login = () => {
             <FormErrorMessage>this is an error</FormErrorMessage>
           </FormControl>
           <Button mt={4} type="submit" colorScheme={"teal"} width="100%">
-            submit
+            Submit
           </Button>
         </form>
         <Text mt={4}>

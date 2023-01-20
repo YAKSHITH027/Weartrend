@@ -21,7 +21,7 @@ export default function Footer() {
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
-          <Stack align={"flex-start"}>
+          <Stack align={{ base: "center", lg: "flex-start" }}>
             <ListHeader>Product</ListHeader>
             <Link href={"#"}>Overview</Link>
             <Stack direction={"row"} align={"center"} spacing={2}>
@@ -39,7 +39,7 @@ export default function Footer() {
             <Link href={"#"}>Pricing</Link>
             <Link href={"#"}>Releases</Link>
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={{ base: "center", lg: "flex-start" }}>
             <ListHeader>Company</ListHeader>
             <Link href={"#"}>About Us</Link>
             <Link href={"#"}>Press</Link>
@@ -47,7 +47,7 @@ export default function Footer() {
             <Link href={"#"}>Contact Us</Link>
             <Link href={"#"}>Partners</Link>
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={{ base: "center", lg: "flex-start" }}>
             <ListHeader>Legal</ListHeader>
             <Link href={"#"}>Cookies Policy</Link>
             <Link href={"#"}>Privacy Policy</Link>
@@ -55,7 +55,7 @@ export default function Footer() {
             <Link href={"#"}>Law Enforcement</Link>
             <Link href={"#"}>Status</Link>
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={{ base: "center", lg: "flex-start" }}>
             <ListHeader>Follow Us</ListHeader>
             <Link href={"#"}>Facebook</Link>
             <Link href={"#"}>Twitter</Link>

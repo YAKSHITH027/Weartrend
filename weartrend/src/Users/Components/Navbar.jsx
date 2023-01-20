@@ -29,7 +29,15 @@ const Navbar = () => {
   } = useContext(ProductContext);
 
   return (
-    <Box className="strict" maxWidth={"100vw"} m="auto" bg={"white"}>
+    <Box
+      className="strict"
+      maxWidth={"100vw"}
+      m="auto"
+      bg={"white"}
+      pos="sticky"
+      top="0"
+      zIndex={"1000"}
+    >
       <Box width={"100%"} m="auto">
         <Box
           px="3rem"
@@ -65,8 +73,7 @@ const Navbar = () => {
               w="100%"
             />
           </Flex>
-          <Link to="/products/mens">mens</Link>
-          {/* <NavLink to={"/register"}>register</NavLink> */}
+
           <Flex
             align={"center"}
             pos={"relative"}
@@ -154,7 +161,9 @@ const Navbar = () => {
             </Flex>
           </Flex>
         </Flex>
-        <MegaMenu />
+        <Hide below="lg">
+          <MegaMenu />
+        </Hide>
         <Box
           pos={"fixed"}
           top="0"

@@ -30,7 +30,7 @@ const InputSearch = () => {
           borderBottom="1px solid"
           ref={searchInput}
         />
-        <Search2Icon pos={"absolute"} top="3rem" right={"5rem"} />
+        <Search2Icon pos={"absolute"} top="2rem" right={"5rem"} />
 
         <Flex
           flexDirection={"column"}

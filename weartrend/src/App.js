@@ -3,7 +3,7 @@ import Navbar from "./Users/Components/Navbar";
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import Sidebar from "./Users/Components/Sidebar";
 import Login from "./Users/Pages/Login";
 import AllRoutes from "./Users/Components/AllRoutes";
 import Footer from "./Users/Components/Footer";
@@ -17,7 +17,8 @@ function App() {
       <div className="App">
         {/* <Navbar /> */}
         <AllRoutes />
-        {/* <Login /> */}
+        {/* <Sidebar /> */}
+        <Login />
         {/* <Footer /> */}
 
         {/* <PlayGround /> */}

@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { productReducer } from "./ProductReducer";
+import { filterReducer, productReducer } from "./ProductReducer";
 import { useToast } from "@chakra-ui/react";
 export const ProductContext = createContext();
 export const url = "https://backend-3ayp.onrender.com/";
@@ -30,15 +30,25 @@ const ProductContextProvider = ({ children }) => {
         isClosable: true,
       });
       dispatch({ type: "LOADING" });
-      console.log("done here", state);
+      // console.log("done here", state);
     } catch (error) {
       dispatch({ type: "LOADING" });
       console.log(error);
     }
   };
 
+  //  filter stuff
+
+  const [filterData, filterDispatch] = useReducer(filterReducer, {
+    rating: null,
+    sort: null,
+    fastDelivery: false,
+  });
+
   return (
-    <ProductContext.Provider value={{ state, dispatch, addCart }}>
+    <ProductContext.Provider
+      value={{ state, dispatch, addCart, filterData, filterDispatch }}
+    >
       {children}
     </ProductContext.Provider>
   );

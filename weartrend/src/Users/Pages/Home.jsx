@@ -5,6 +5,7 @@ import SimpleSlider from "../Components/Caroseal";
 import { autoImage } from "../utils";
 import ProductSlider from "../Components/ProductSlider";
 import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
 
 const Home = () => {
   //   console.log(autoImage);
@@ -64,6 +65,7 @@ const Home = () => {
           />
         </Box>
       </Box>
+      <Footer />
     </Box>
   );
 };

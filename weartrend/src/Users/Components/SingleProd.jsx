@@ -1,21 +1,32 @@
-import { Badge, Box, Image, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
+import Rating from "./Rating";
 
 const SingleProd = ({ prodData }) => {
   return (
     <Link to={`/singleproduct/${prodData.id}`}>
-      <Box bg={"green.400"} borderRadius={"8px"} padding="8px" minH="25rem">
+      <Box
+        borderWidth={"2px"}
+        borderRadius={"8px"}
+        padding="8px"
+        minH={{ base: "auto", md: "25rem" }}
+      >
         <Image
           src={prodData.image}
           width="100%"
-          height={"270px"}
+          height={{ base: "170", md: "270px" }}
           borderRadius="lg"
-          border={"2px solid red"}
+          // border={"2px solid red"}
         />
         <Text py={"1"}>{prodData.brand}</Text>
         <Text height={"3rem"}>{prodData.title}</Text>
         <Text>
+          <Flex align={"center"}>
+            <Rating rating={prodData.ratings} />
+
+            <Text marginLeft={"1"}> {prodData.totalRatings}</Text>
+          </Flex>
           <Badge colorScheme="green" fontSize="1rem" mr={2}>
             INR {prodData.offerPrice}
           </Badge>
