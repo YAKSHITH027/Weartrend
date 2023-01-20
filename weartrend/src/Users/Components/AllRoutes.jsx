@@ -8,6 +8,7 @@ import Profile from "../Pages/Profile";
 import Register from "../Pages/Register";
 import SingleProduct from "../Pages/SingleProduct";
 import Cart from "../Pages/Cart";
+import PageNotFound from "../Pages/PageNotFound";
 
 const AllRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AllRoutes = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/products/:category" element={<Products />} />
       <Route path="/singleproduct/:id" element={<SingleProduct />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };

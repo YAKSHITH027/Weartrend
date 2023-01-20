@@ -8,44 +8,51 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { ProductContext } from "../Context/ProductContext/ProductContext";
 import Rating from "./Rating";
 const Filter = () => {
-  const [value, setValue] = useState("");
-  const [rate, setRate] = useState(3);
-  const handleChange = (e) => {
-    console.log(e);
-    setValue(e);
-  };
-  const handleFilter = () => {
-    setValue("");
-  };
-  console.log("value", value);
+  const { filterData, filterDispatch } = useContext(ProductContext);
+  console.log({ filterData });
+
   return (
     <Flex
-      border={"2px solid blue"}
+      py={5}
       width="full"
       flexDirection={"column"}
-      px="2rem"
-      gap={4}
+      px={{ base: "0.4rem", lg: "2rem" }}
+      gap={6}
+      // borderWidth="2px"
     >
-      <RadioGroup onChange={handleChange} value={value}>
+      <RadioGroup
+        onChange={(e) => {
+          filterDispatch({ type: "SORT", payload: e });
+        }}
+        value={filterData.sort}
+      >
         <Stack direction="column">
           <Radio value="asc">low-to-high</Radio>
-          <Radio value="2">high-to-low</Radio>
+          <Radio value="desc">high-to-low</Radio>
         </Stack>
       </RadioGroup>
       <Box>
-        <Checkbox>Include fast delivery</Checkbox>
+        <input
+          type="checkbox"
+          checked={filterData.fastDelivery}
+          onChange={(e) => {
+            filterDispatch({ type: "FASTDELIVERY", payload: e.target.checked });
+          }}
+        />
+        <span> include fast fastDelivery</span>
       </Box>
       <Box>
         <label>rating :</label>
         <RadioGroup
           onChange={(e) => {
-            console.log(e);
+            filterDispatch({ type: "RATING", payload: e });
           }}
-          value={rate}
+          value={filterData.rating}
         >
           <Stack direction="column">
             <Radio value="1">2 & above</Radio>
@@ -60,7 +67,9 @@ const Filter = () => {
         display={"block"}
         width="full"
         colorScheme={"blue"}
-        onClick={handleFilter}
+        onClick={() => {
+          filterDispatch({ type: "RESET" });
+        }}
       >
         clear filter
       </Button>
