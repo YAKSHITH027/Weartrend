@@ -22,7 +22,9 @@ import { AiFillDelete } from "react-icons/ai";
 import InputSearch from "./InputSearch";
 import { Link, NavLink } from "react-router-dom";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
 const Navbar = () => {
+  const { logoutUser } = useContext(AuthContext);
   const {
     state: { cart, isLoading },
     dispatch,
@@ -156,8 +158,17 @@ const Navbar = () => {
               </Flex>
             </Hide>
             <Flex gap={3}>
-              <Button>Sign In</Button>
+              <Link to={"/login"}>
+                <Button>Sign In</Button>
+              </Link>
               <Button>Sign Up</Button>
+              <Button
+                onClick={() => {
+                  logoutUser();
+                }}
+              >
+                Log Out
+              </Button>
             </Flex>
           </Flex>
         </Flex>

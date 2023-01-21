@@ -12,7 +12,7 @@ export default class SimpleSlider extends Component {
       autoplay: true,
       autoplaySpeed: 4000,
     };
-    console.log(this.props.autoData);
+    // console.log(this.props.autoData);
     const styles = { backgroundColor: "green", width: "100%" };
     return (
       <div>
