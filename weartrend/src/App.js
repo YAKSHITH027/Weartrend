@@ -11,7 +11,7 @@ import ProductContextProvider from "./Users/Context/ProductContext/ProductContex
 import Loading from "./Users/Components/Loading";
 import PlayGround from "./Users/Components/PlayGround";
 import AuthContextProvider from "./Users/Context/AuthContext/AuthContext";
-
+import AddProductModal from "./Admin/Compornts/AddProductModal";
 function App() {
   return (
     <AuthContextProvider>
@@ -20,11 +20,7 @@ function App() {
           {/* <Navbar /> */}
           <AllRoutes />
           {/* <Sidebar /> */}
-          {/* <Login /> */}
-          {/* <Footer /> */}
-
-          {/* <PlayGround /> */}
-          {/* <Loading /> */}
+          {/* <AddProductModal /> */}
         </div>
       </ProductContextProvider>
     </AuthContextProvider>
