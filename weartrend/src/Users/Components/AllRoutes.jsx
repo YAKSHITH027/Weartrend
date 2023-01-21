@@ -14,6 +14,7 @@ import Sidebar from "../../Admin/Compornts/Sidebar";
 import User from "../../Admin/Pages/User";
 import Orders from "../../Admin/Pages/Orders";
 import Messages from "../../Admin/Pages/Messages";
+import PrivateRoutes from "./PrivateRoutes";
 
 const AllRoutes = () => {
   return (
@@ -21,9 +22,30 @@ const AllRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/payment" element={<Payment />} />
-      <Route path="/cart" element={<Cart />} />
+      <Route
+        path="/profile"
+        element={
+          <PrivateRoutes>
+            <Profile />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/payment"
+        element={
+          <PrivateRoutes>
+            <Payment />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <PrivateRoutes>
+            <Cart />
+          </PrivateRoutes>
+        }
+      />
 
       <Route
         path="/dashboard"
@@ -58,8 +80,22 @@ const AllRoutes = () => {
         }
       />
 
-      <Route path="/products/:category" element={<Products />} />
-      <Route path="/singleproduct/:id" element={<SingleProduct />} />
+      <Route
+        path="/products/:category"
+        element={
+          <PrivateRoutes>
+            <Products />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/singleproduct/:id"
+        element={
+          <PrivateRoutes>
+            <SingleProduct />
+          </PrivateRoutes>
+        }
+      />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

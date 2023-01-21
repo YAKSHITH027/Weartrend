@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React, { Component } from "react";
 import Slider from "react-slick";
 
@@ -39,7 +39,7 @@ export default class ProductSlider extends Component {
       ],
     };
     return (
-      <div>
+      <Box >
         <Slider {...settings}>
           <div>
             <div>
@@ -141,7 +141,7 @@ export default class ProductSlider extends Component {
             <Text textAlign={"center"}>300</Text>
           </div>
         </Slider>
-      </div>
+      </Box>
     );
   }
 }
