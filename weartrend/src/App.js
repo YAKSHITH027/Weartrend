@@ -10,21 +10,24 @@ import Footer from "./Users/Components/Footer";
 import ProductContextProvider from "./Users/Context/ProductContext/ProductContext";
 import Loading from "./Users/Components/Loading";
 import PlayGround from "./Users/Components/PlayGround";
+import AuthContextProvider from "./Users/Context/AuthContext/AuthContext";
 
 function App() {
   return (
-    <ProductContextProvider>
-      <div className="App">
-        {/* <Navbar /> */}
-        <AllRoutes />
-        {/* <Sidebar /> */}
-        <Login />
-        {/* <Footer /> */}
+    <AuthContextProvider>
+      <ProductContextProvider>
+        <div className="App">
+          {/* <Navbar /> */}
+          <AllRoutes />
+          {/* <Sidebar /> */}
+          {/* <Login /> */}
+          {/* <Footer /> */}
 
-        {/* <PlayGround /> */}
-        {/* <Loading /> */}
-      </div>
-    </ProductContextProvider>
+          {/* <PlayGround /> */}
+          {/* <Loading /> */}
+        </div>
+      </ProductContextProvider>
+    </AuthContextProvider>
   );
 }
 
