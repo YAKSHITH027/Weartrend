@@ -69,11 +69,13 @@ const Navbar = () => {
           pos="relative"
         >
           <Flex w="15rem" h={"100%"} alignItems="center">
-            <Image
-              src="https://i.ibb.co/Rgqq7D2/WEARTREND-1-removebg-preview.png"
-              alg="logo"
-              w="100%"
-            />
+            <Link to={"/"}>
+              <Image
+                src="https://i.ibb.co/Rgqq7D2/WEARTREND-1-removebg-preview.png"
+                alg="logo"
+                w="100%"
+              />
+            </Link>
           </Flex>
 
           <Flex

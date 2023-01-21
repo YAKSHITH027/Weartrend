@@ -22,9 +22,17 @@ import { ProductContext } from "../Context/ProductContext/ProductContext";
 import Footer from "../Components/Footer";
 import FilterModal from "../Components/FilterModal";
 const Products = () => {
+  const setParam = (page) => {
+    if (page <= 0) {
+      return 1;
+    }
+    return Number(page);
+  };
   const [isLoading, setLoading] = useState(false);
   const [searchParam, setSearchParam] = useSearchParams();
-  const [page, setPage] = useState(+searchParam.get("page" || 1));
+
+  const [page, setPage] = useState(setParam(searchParam.get("page")) || 1);
+  const [total, setTotal] = useState(null);
   let { category } = useParams();
   const {
     state,
@@ -59,13 +67,16 @@ const Products = () => {
         `https://backend-3ayp.onrender.com/product?category=${category}&_limit=12&_page=${page}${query}`
       );
       let data = await res.json();
-
+      setTotal(res.headers.get("X-Total-Count"));
       setLoading(false);
       dispatch({ type: "CATEGORY_ITEM", payload: data });
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    setPage(1);
+  }, [category]);
 
   useEffect(() => {
     let obj = {};
@@ -86,7 +97,7 @@ const Products = () => {
   }, [category, page, sort, rating, fastDelivery]);
 
   // console.log("searchhh", searchParam.get("page"));
-
+  // console.log(total, "total");
   if (isLoading) return <Loading />;
   // if (state.products.length == 0) return "no match found";
   return (
@@ -171,6 +182,9 @@ const Products = () => {
           </Button>
           <Text padding={4}>{page}</Text>
           <Button
+            isDisabled={
+              Math.ceil(total / 12) == page || state.products.length == 0
+            }
             onClick={() => {
               setPage(page + 1);
             }}

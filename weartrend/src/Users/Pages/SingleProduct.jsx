@@ -22,6 +22,7 @@ import { useParams } from "react-router-dom";
 import Footer from "../Components/Footer";
 import Loading from "../Components/Loading";
 import Navbar from "../Components/Navbar";
+import Rating from "../Components/Rating";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
 
 const SingleProduct = () => {
@@ -81,6 +82,10 @@ const SingleProduct = () => {
         >
           <Heading py={"1rem"}>{singleData.brand}</Heading>
           <Text paddingBottom={"0.54rem"}>{singleData.title}</Text>
+          <Flex align={"center"}>
+            <Rating rating={singleData.ratings} />{" "}
+            <span> {singleData.totalRatings}</span>
+          </Flex>
           <Stack direction="row" py={"1rem"}>
             <Badge colorScheme="green" fontSize="1.3rem">
               INR {singleData.offerPrice}
