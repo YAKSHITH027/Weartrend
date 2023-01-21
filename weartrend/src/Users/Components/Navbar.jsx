@@ -14,17 +14,27 @@ import {
   PopoverArrow,
   PopoverContent,
   Button,
+  Show,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
 } from "@chakra-ui/react";
 
 import MegaMenu from "./MegaMenu";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaBars } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import InputSearch from "./InputSearch";
 import { Link, NavLink } from "react-router-dom";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
+import Sidebar from "./Sidebar";
 const Navbar = () => {
-  const { logoutUser } = useContext(AuthContext);
+  const { logoutUser, authUser } = useContext(AuthContext);
   const {
     state: { cart, isLoading },
     dispatch,
@@ -41,34 +51,40 @@ const Navbar = () => {
       zIndex={"1000"}
     >
       <Box width={"100%"} m="auto">
-        <Box
-          px="3rem"
-          py="0.2rem"
-          borderBottom="1px solid grey"
-          bg={"white"}
-          position="relative"
-          zIndex={0}
-        >
-          <Flex fontSize="1rem" color={"gray.600"}>
-            <Spacer />
-            <Box px="6px" borderRight="1px solid black">
-              stores and events
-            </Box>
-            <Box px="6px" borderRight="1px solid black">
-              shopping services
-            </Box>
-            <Box px="6px">inr</Box>
-          </Flex>
-        </Box>
+        <Hide below="md">
+          <Box
+            px="3rem"
+            py="0.2rem"
+            borderBottom="1px solid grey"
+            bg={"white"}
+            position="relative"
+            zIndex={0}
+          >
+            <Flex fontSize="1rem" color={"gray.600"}>
+              <Spacer />
+              <Box px="6px" borderRight="1px solid black">
+                stores and events
+              </Box>
+              <Box px="6px" borderRight="1px solid black">
+                shopping services
+              </Box>
+              <Box px="6px">inr</Box>
+            </Flex>
+          </Box>
+        </Hide>
         <Flex
           bg="white"
           justifyContent="space-between"
           px={"1rem"}
           // py="1rem"
-          height="5rem"
+          height={{ base: "3.4rem", md: "4.5rem" }}
           pos="relative"
         >
-          <Flex w="15rem" h={"100%"} alignItems="center">
+          <Flex
+            w={{ base: "9rem", md: "15rem" }}
+            h={"100%"}
+            alignItems="center"
+          >
             <Link to={"/"}>
               <Image
                 src="https://i.ibb.co/Rgqq7D2/WEARTREND-1-removebg-preview.png"
@@ -159,19 +175,52 @@ const Navbar = () => {
                 </Popover>
               </Flex>
             </Hide>
-            <Flex gap={3}>
-              <Link to={"/login"}>
-                <Button>Sign In</Button>
-              </Link>
-              <Button>Sign Up</Button>
-              <Button
-                onClick={() => {
-                  logoutUser();
-                }}
-              >
-                Log Out
-              </Button>
-            </Flex>
+            <Show below="md">
+              <Sidebar />
+            </Show>
+            <Hide below="md">
+              <Flex gap={3}>
+                {authUser ? (
+                  <Menu>
+                    <MenuButton as={Button} colorScheme="pink">
+                      Profile
+                    </MenuButton>
+                    <MenuList>
+                      <MenuGroup title="Profile">
+                        <Link>
+                          <MenuItem>My Account</MenuItem>
+                        </Link>
+                        <Link>
+                          <MenuItem>Cart</MenuItem>
+                        </Link>
+                        <MenuItem>Payment</MenuItem>
+
+                        <Button
+                          width="10.9rem"
+                          mx={4}
+                          mt="4"
+                          colorScheme="blue"
+                          onClick={() => {
+                            logoutUser();
+                          }}
+                        >
+                          Log Out
+                        </Button>
+                      </MenuGroup>
+                    </MenuList>
+                  </Menu>
+                ) : (
+                  <Flex gap={2}>
+                    <Link to={"/login"}>
+                      <Button>Sign In</Button>
+                    </Link>
+                    <Link to={"/register"}>
+                      <Button colorScheme={"twitter"}>Sign Up</Button>
+                    </Link>
+                  </Flex>
+                )}
+              </Flex>
+            </Hide>
           </Flex>
         </Flex>
         <Hide below="lg">

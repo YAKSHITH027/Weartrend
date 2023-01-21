@@ -14,6 +14,7 @@ const AuthContextProvider = ({ children }) => {
   const toast = useToast();
   console.log(authUser);
   const loginUser = (e) => {
+    setAuth(e);
     localStorage.setItem("userData", JSON.stringify(e));
   };
   const logoutUser = async () => {
@@ -26,6 +27,7 @@ const AuthContextProvider = ({ children }) => {
         duration: 4000,
         isClosable: true,
       });
+
       localStorage.setItem("userData", null);
       console.log(res);
       navigte("/login");

@@ -7,9 +7,11 @@ const MegaMenu = () => {
     <Flex
       justifyContent={"space-around"}
       flexDirection={{ base: "column", lg: "row" }}
+      gap={{ base: "4" }}
       fontSize="1.2rem"
       overflow={"hidden"}
       paddingBottom="1rem"
+      className="mega-menu"
     >
       <Link to="/products/womens">
         <Heading fontSize="1.2rem">womens</Heading>
