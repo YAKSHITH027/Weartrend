@@ -24,7 +24,7 @@ export default function AddProductModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [prodData, setProdData] = useState({
     image: "",
-    quantity: 0,
+    quntity: 0,
     price: 0,
     title: "",
     offerPrice: 0,
@@ -35,13 +35,13 @@ export default function AddProductModal() {
     fastDelivery: true,
     totalRatings: 6,
   });
-  const { image, quantity, price, title, offerPrice, brand, category } =
+  const { image, quntity, price, title, offerPrice, brand, category } =
     prodData;
   const [isLoading, setLoading] = useState(false);
   const handleAdd = async () => {
     if (
       !image ||
-      !quantity ||
+      !quntity ||
       !price ||
       !title ||
       !offerPrice ||
@@ -152,9 +152,9 @@ export default function AddProductModal() {
                     />
                   </Box>
                   <Box width={"full"}>
-                    <FormLabel>Quantity</FormLabel>
+                    <FormLabel>quantity</FormLabel>
                     <Input
-                      name="quantity"
+                      name="quntity"
                       type={"number"}
                       isRequired
                       onChange={handleChange}

@@ -6,6 +6,10 @@ export const productReducer = (state, action) => {
       // console.log("form", action.payload);
       return { ...state, products: action.payload };
     }
+    case "UPDATE_TOTAL": {
+      // console.log("form", action.payload);
+      return { ...state, total: action.payload };
+    }
     case "ADD_TO_CART": {
       return {
         ...state,

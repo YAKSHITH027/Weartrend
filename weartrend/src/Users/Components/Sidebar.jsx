@@ -89,6 +89,7 @@ export default function Sidebar() {
                   onClick={() => {
                     logoutUser();
                   }}
+                  colorScheme="twitter"
                 >
                   Log Out
                 </Button>

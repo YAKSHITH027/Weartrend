@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { BsCart3 } from "react-icons/bs";
@@ -6,34 +6,39 @@ import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
 import { BsCartCheck } from "react-icons/bs";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
 import "./Sidebar.css";
+import { Button, Flex } from "@chakra-ui/react";
+import { useContext } from "react";
+import { AdminContext } from "../AdminContext/AdminContext";
 const routes = [
   {
-    path: "/dashboard",
+    path: "/admin/dashboard",
     name: "Dashboard",
     icon: <FaHome />,
   },
   {
-    path: "/user",
+    path: "/admin/user",
     name: "Users",
     icon: <FaUser />,
   },
   {
-    path: "/orders",
+    path: "/admin/orders",
     name: "Orders",
     icon: <BsCart3 />,
   },
   {
-    path: "/messages",
+    path: "/admin/messages",
     name: "Messages",
     icon: <MdMessage />,
   },
 ];
 
 const Sidebar = ({ children }) => {
+  const { logoutAdmin } = useContext(AdminContext);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const inputAnimation = {
@@ -143,6 +148,28 @@ const Sidebar = ({ children }) => {
               );
             })}
           </section>
+          <Flex
+            align={"center"}
+            pos={"fixed"}
+            width={"11rem"}
+            top="1rem"
+            right="3rem"
+          >
+            {/* <RiLogoutBoxRFill zIndex="33" fontSize={"1.6rem"} width="1rem" /> */}
+            <Link to="/">
+              <Button
+                zIndex={0}
+                onClick={() => logoutAdmin()}
+                width="10rem"
+                mx="3px"
+                marginLeft={"14px"}
+                color="black"
+                // colorScheme={"blue"}
+              >
+                logout
+              </Button>
+            </Link>
+          </Flex>
         </motion.div>
 
         <main>{children}</main>

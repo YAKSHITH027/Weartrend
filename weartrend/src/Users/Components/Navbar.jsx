@@ -34,6 +34,7 @@ import { ProductContext } from "../Context/ProductContext/ProductContext";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 const Navbar = () => {
   const { logoutUser, authUser } = useContext(AuthContext);
   const {
@@ -52,12 +53,14 @@ const Navbar = () => {
   };
   return (
     <Box
+      borderBottomWidth={"1px"}
       className="strict"
       maxWidth={"100vw"}
       m="auto"
       bg={"white"}
       pos="sticky"
       top="0"
+      // overflow={"hidden"}
       zIndex={"1000"}
     >
       <Box width={"100%"} m="auto">
@@ -215,37 +218,8 @@ const Navbar = () => {
           </Flex>
           <Flex alignItems={"center"}>
             <Hide below="md">
-              <Flex gap={3}>
-                {authUser ? (
-                  <Menu>
-                    <MenuButton as={Button} colorScheme="blue">
-                      Profile
-                    </MenuButton>
-                    <MenuList>
-                      <MenuGroup title="Profile">
-                        <Link>
-                          <MenuItem>My Account</MenuItem>
-                        </Link>
-                        <Link>
-                          <MenuItem>Cart</MenuItem>
-                        </Link>
-                        <MenuItem>Payment</MenuItem>
-
-                        <Button
-                          width="10.9rem"
-                          mx={4}
-                          mt="4"
-                          colorScheme="blue"
-                          onClick={() => {
-                            logoutUser();
-                          }}
-                        >
-                          Log Out
-                        </Button>
-                      </MenuGroup>
-                    </MenuList>
-                  </Menu>
-                ) : (
+              <Flex gap={3} marginRight="4rem">
+                {!authUser && (
                   <Flex gap={2}>
                     <Link to={"/login"}>
                       <Button>Sign In</Button>
@@ -253,12 +227,53 @@ const Navbar = () => {
                     <Link to={"/register"}>
                       <Button colorScheme={"twitter"}>Sign Up</Button>
                     </Link>
+                    <Link to="/admin/dashboard">
+                      <Button>Admin Panel</Button>
+                    </Link>
                   </Flex>
                 )}
               </Flex>
             </Hide>
           </Flex>
+
+          {/* starts herar */}
+          {authUser && (
+            <Hide below="md">
+              <Flex marginRight="4rem" marginTop={"1rem"}>
+                <Menu>
+                  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                    Profile
+                  </MenuButton>
+                  <MenuList>
+                    <Link to={"/profile"}>
+                      <MenuItem>My Account</MenuItem>
+                    </Link>
+                    <Link to={"/cart"}>
+                      <MenuItem>Cart</MenuItem>
+                    </Link>
+                    <Link to="/payment">
+                      <MenuItem>Payment</MenuItem>
+                    </Link>
+
+                    <Button
+                      width="10.9rem"
+                      mx={4}
+                      mt="4"
+                      colorScheme="blue"
+                      onClick={() => {
+                        logoutUser();
+                      }}
+                    >
+                      Log Out
+                    </Button>
+                  </MenuList>
+                </Menu>
+              </Flex>
+              {/* ends here */}
+            </Hide>
+          )}
         </Flex>
+
         <Hide below="lg">
           <MegaMenu />
         </Hide>

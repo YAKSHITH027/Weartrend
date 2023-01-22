@@ -15,12 +15,14 @@ import User from "../../Admin/Pages/User";
 import Orders from "../../Admin/Pages/Orders";
 import Messages from "../../Admin/Pages/Messages";
 import PrivateRoutes from "./PrivateRoutes";
-
+import AdminLogin from "../../Admin/Pages/AdminLogin";
+import AdminPrivate from "../../Admin/Compornts/AdminPrivate";
 const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/adminlogin" element={<AdminLogin />} />
       <Route path="/register" element={<Register />} />
       <Route
         path="/profile"
@@ -50,33 +52,41 @@ const AllRoutes = () => {
       <Route
         path="/admin/dashboard"
         element={
-          <Sidebar>
-            <Dashboard />
-          </Sidebar>
+          <AdminPrivate>
+            <Sidebar>
+              <Dashboard />
+            </Sidebar>
+          </AdminPrivate>
         }
       />
       <Route
         path="/admin/orders"
         element={
-          <Sidebar>
-            <Orders />
-          </Sidebar>
+          <AdminPrivate>
+            <Sidebar>
+              <Orders />
+            </Sidebar>
+          </AdminPrivate>
         }
       />
       <Route
         path="/admin/messages"
         element={
-          <Sidebar>
-            <Messages />
-          </Sidebar>
+          <AdminPrivate>
+            <Sidebar>
+              <Messages />
+            </Sidebar>
+          </AdminPrivate>
         }
       />
       <Route
         path="/admin/user"
         element={
-          <Sidebar>
-            <User />
-          </Sidebar>
+          <AdminPrivate>
+            <Sidebar>
+              <User />
+            </Sidebar>
+          </AdminPrivate>
         }
       />
 

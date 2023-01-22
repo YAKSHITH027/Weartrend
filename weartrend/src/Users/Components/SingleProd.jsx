@@ -14,9 +14,14 @@ const SingleProd = ({ prodData }) => {
       >
         <Image
           src={prodData.image}
+          margin="auto"
           width="100%"
           height={{ base: "170", md: "270px" }}
           borderRadius="lg"
+          transition={"all 0.4s"}
+          _hover={{
+            padding: "10px",
+          }}
           // border={"2px solid red"}
         />
         <Text py={"1"}>{prodData.brand}</Text>

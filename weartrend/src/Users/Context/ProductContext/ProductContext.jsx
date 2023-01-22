@@ -1,6 +1,7 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { filterReducer, productReducer } from "./ProductReducer";
 import { useToast } from "@chakra-ui/react";
+import { AuthContext } from "../AuthContext/AuthContext";
 export const ProductContext = createContext();
 export const url = "https://backend-3ayp.onrender.com/";
 const ProductContextProvider = ({ children }) => {
@@ -8,17 +9,21 @@ const ProductContextProvider = ({ children }) => {
     products: [],
     cart: [],
     isLoading: false,
+    total: 0,
   });
   const toast = useToast();
+  const { authUser } = useContext(AuthContext);
 
   // post cart item
   let addCart = async (data) => {
+    console.log(data, authUser.uid);
+    let obj = { cart: [data], userId: authUser.uid };
     state.isLoading = true;
     try {
       let res = await fetch(`${url}cart`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(obj),
       });
 
       console.log(res);

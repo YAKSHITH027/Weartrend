@@ -10,19 +10,20 @@
   left: 3% !important;
   z-index: 1;
   color: black !important;
-  /* background-color: black !important; */
+  background-color: black !important;
   border-radius: 50%;
 }
 .slick-next {
   right: 3% !important;
   z-index: 1;
-  /* background-color: black !important; */
+  background-color: black !important;
   border-radius: 50%;
 }
 
 .mega-menu h2 {
   color: rgb(95, 108, 108) !important;
   /* border-bottom: 2px solid; */
+  text-transform: uppercase;
   font-weight: 500;
 }
 .mega-menu h2:hover {
