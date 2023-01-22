@@ -6,9 +6,30 @@ import { autoImage } from "../utils";
 import ProductSlider from "../Components/ProductSlider";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Home = () => {
   //   console.log(autoImage);
+
+  const [womensData, setWomensData] = useState([]);
+  const [mensData, setMensData] = useState([]);
+
+  let getData = async (category) => {
+    let res = await fetch(
+      `${process.env.REACT_APP_JSON_KEY}?${category}&_limit=16`
+    );
+    let data = await res.json();
+    setWomensData(data);
+  };
+  useEffect(() => {
+    getData("womens");
+  }, []);
+  let arr1 = womensData.slice(0, 8);
+  let arr2 = womensData.slice(8, 15);
+
+  console.log("home", arr1, arr2);
+
   return (
     <Box>
       <Navbar />
@@ -36,7 +57,7 @@ const Home = () => {
             RECOMMENDED FOR YOU
           </Heading>
           <Box>
-            <ProductSlider />
+            <ProductSlider dataProd={arr1} />
           </Box>
         </Box>
         <Flex
@@ -77,7 +98,7 @@ const Home = () => {
           >
             DESIGNER BOUTIQUE
           </Heading>
-          <ProductSlider />
+          <ProductSlider dataProd={arr2} />
         </Box>
         <Hide below="md">
           <Box>

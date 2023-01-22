@@ -23,12 +23,14 @@ import Footer from "../Components/Footer";
 import Loading from "../Components/Loading";
 import Navbar from "../Components/Navbar";
 import Rating from "../Components/Rating";
+
 import { ProductContext } from "../Context/ProductContext/ProductContext";
 
 const SingleProduct = () => {
   const [singleData, setSingleData] = useState({});
   const [isLoading, setLoading] = useState(false);
   const { state, dispatch, addCart } = useContext(ProductContext);
+
   let getProduct = async (id) => {
     setLoading(true);
     try {
@@ -140,6 +142,7 @@ const SingleProduct = () => {
           <Button
             mt={"1rem"}
             width={"50%"}
+            isDisabled={state.cart.some((item) => item.id == singleData.id)}
             display={"flex"}
             justifyContent="center"
             colorScheme="orange"
@@ -214,9 +217,7 @@ const SingleProduct = () => {
           </Box>
         </Box>
       </Flex>
-      <Box h={"12rem"} bg="darkcyan" my={"2rem"}>
-        Reviews
-      </Box>
+
       <Footer />
     </Box>
   );

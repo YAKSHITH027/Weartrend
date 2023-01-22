@@ -1,33 +1,53 @@
 import { Box, Button, Center, Flex, Image, Text } from "@chakra-ui/react";
+import { async } from "@firebase/util";
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Loading from "../../Users/Components/Loading";
 import AddProductModal from "../Compornts/AddProductModal";
 
 const Dashboard = () => {
   const URL = process.env.REACT_APP_JSON_KEY;
   const [isLoading, setLoading] = useState(false);
+  const [searchParam, setSearchParam] = useSearchParams();
   const [products, setProducts] = useState([]);
-
+  const [totalPage, setTotalPage] = useState(1);
+  const [page, setPage] = useState(+searchParam.get("page") || 1);
   const getProducts = async () => {
     setLoading(true);
     try {
-      let res = await fetch(`${URL}?_page=1&_limit=10`);
+      let res = await fetch(`${URL}?_page=${page}&_limit=10`);
       let data = await res.json();
       setLoading(false);
+      setTotalPage(res.headers.get("X-Total-Count"));
       setProducts(data);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
+  //   delete product
+
+  const deleteProduct = async (id) => {
+    try {
+      await fetch(`${URL}/${id}`, { method: "DELETE" });
+
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    setSearchParam({ page });
+  }, [page]);
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [page]);
 
   if (isLoading) return <Loading />;
   return (
     <Box
-      //   border={"2px solid blue"}
+      // border={"2px solid blue"}
       height="100%"
       overflowY={"scroll"}
       paddingRight="9rem"
@@ -46,7 +66,9 @@ const Dashboard = () => {
             height={"100%"}
           />
         </Box>
-        <Text marginLeft={"19rem"}>All products</Text>
+        <Text fontSize={"2rem"} marginLeft={"19rem"}>
+          All products
+        </Text>
       </Flex>
       <Flex
         justifyContent={"space-around"}
@@ -129,7 +151,7 @@ const Dashboard = () => {
         // marginRight={"8rem"}
         pos={"relative"}
       >
-        <Text pos={"fixed"} top="3rem" right={"3rem"} colorScheme="green">
+        <Text pos={"fixed"} top="5rem" right={"3rem"} colorScheme="green">
           <AddProductModal />
         </Text>
 
@@ -137,7 +159,7 @@ const Dashboard = () => {
           {products?.map((item) => {
             return (
               <Flex
-                height={"100px"}
+                height={"70px"}
                 justifyContent="space-around"
                 // alignItems={"center"}
                 //   border={"2px solid blue"}
@@ -156,13 +178,51 @@ const Dashboard = () => {
                   <Button colorScheme={"orange"}>Edit</Button>
                 </Center>
                 <Center>
-                  <Button colorScheme={"red"}>Delete</Button>
+                  <Button
+                    colorScheme={"red"}
+                    onClick={() => {
+                      deleteProduct(item.id);
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </Center>
               </Flex>
             );
           })}
         </Flex>
       </Box>
+      <Flex flexDir={"column"} pos="absolute" top={"8rem"} right="3rem">
+        <Flex
+          bg={"rgb(58, 74, 99)"}
+          color="white"
+          width={"10.5rem"}
+          px="1rem"
+          py="0.4rem"
+          mb="1rem"
+          borderRadius={"xl"}
+          flexDir="column"
+          align={"center"}
+        >
+          <Text>total Products</Text>
+          <Text>{totalPage}</Text>
+        </Flex>
+      </Flex>
+      <Flex pos="fixed" gap={"2"} bottom={"2rem"} right="3rem">
+        <Button
+          isDisabled={page <= 1}
+          onClick={() => setPage((prev) => prev - 1)}
+        >
+          prev
+        </Button>
+        <Button>{page}</Button>
+        <Button
+          isDisabled={page == Math.ceil(totalPage / 10)}
+          onClick={() => setPage((prev) => prev + 1)}
+        >
+          next
+        </Button>
+      </Flex>
     </Box>
   );
 };

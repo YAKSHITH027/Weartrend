@@ -74,6 +74,8 @@ const Products = () => {
       console.log(error);
     }
   };
+  console.log("sort value from p", sort);
+  console.log(state.products);
   useEffect(() => {
     setPage(1);
   }, [category]);

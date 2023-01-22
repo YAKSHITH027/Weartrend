@@ -1,5 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
 export default class ProductSlider extends Component {
@@ -39,107 +40,21 @@ export default class ProductSlider extends Component {
       ],
     };
     return (
-      <Box >
+      <Box>
         <Slider {...settings}>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"100%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"100%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"100%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"100%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"100%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"100%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"100%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"90%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://images.bloomingdalesassets.com/is/image/BLM/products/9/optimized/12413479_fpx.tif?op_sharpen=1&wid=240&hei=300&fit=fit,1&qlt=50&layer=comp&op_sharpen=0&resMode=bicub&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
-                alt=""
-                width={"100%"}
-              />
-            </div>
-            <Text textAlign={"center"}>carro mano</Text>
-            <Text textAlign={"center"}>300</Text>
-          </div>
+          {this.props.dataProd?.map((item) => {
+            return (
+              <Link to={`/singleproduct/${item.id}`}>
+                <div key={item.id}>
+                  <div>
+                    <img src={item.image} width={"100%"} />
+                  </div>
+                  <Text textAlign={"center"}>{item.brand}</Text>
+                  <Text textAlign={"center"}>₹ {item.price}</Text>
+                </div>
+              </Link>
+            );
+          })}
         </Slider>
       </Box>
     );

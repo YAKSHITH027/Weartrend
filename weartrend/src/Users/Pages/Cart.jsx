@@ -25,7 +25,7 @@ const Cart = () => {
     let t = cart.reduce((acc, curr) => {
       return acc + Number(curr.price) * curr.qty;
     }, 0);
-
+    dispatch({ type: "UPDATE_TOTAL", payload: t });
     setTotalAmount(t);
   }, [cart]);
 
@@ -70,10 +70,14 @@ const Cart = () => {
                       borderRadius={"md"}
                     />
                   </Box>
-                  <Text>{item.brand}</Text>
-                  <Text>₹ {item.price}</Text>
-                  <Flex>
+                  <Box width={"9rem"}>
+                    <Text fontSize={"1.18rem"}>{item.brand}</Text>
+                    <Text color={"gray.700"}>{item.title}</Text>
+                  </Box>
+                  <Text my="7px">Price : ₹ {item.price}</Text>
+                  <Flex align={"center"}>
                     <Rating rating={item.ratings} />
+                    <span>({item.totalRatings})</span>
                   </Flex>
                   <Flex align={"center"}>
                     <Button

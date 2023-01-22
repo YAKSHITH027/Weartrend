@@ -27,6 +27,7 @@ const Filter = () => {
     >
       <RadioGroup
         onChange={(e) => {
+          console.log("sort checking", e);
           filterDispatch({ type: "SORT", payload: e });
         }}
         value={filterData.sort}

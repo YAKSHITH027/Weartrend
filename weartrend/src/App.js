@@ -10,18 +10,24 @@ import Footer from "./Users/Components/Footer";
 import ProductContextProvider from "./Users/Context/ProductContext/ProductContext";
 import Loading from "./Users/Components/Loading";
 import PlayGround from "./Users/Components/PlayGround";
-import AuthContextProvider from "./Users/Context/AuthContext/AuthContext";
+
 import AddProductModal from "./Admin/Compornts/AddProductModal";
+import PaymentSuccessModal from "./Users/Components/PaymentSuccessModal";
+import AdminContextProvider from "./Admin/AdminContext/AdminContext";
+import AuthContextProvider from "./Users/Context/AuthContext/AuthContext";
 function App() {
   return (
     <AuthContextProvider>
       <ProductContextProvider>
-        <div className="App">
-          {/* <Navbar /> */}
-          <AllRoutes />
-          {/* <Sidebar /> */}
-          {/* <AddProductModal /> */}
-        </div>
+        <AdminContextProvider>
+          <div className="App">
+            {/* <Navbar /> */}
+            <AllRoutes />
+            {/* <PaymentSuccessModal /> */}
+            {/* <Sidebar /> */}
+            {/* <AddProductModal /> */}
+          </div>
+        </AdminContextProvider>
       </ProductContextProvider>
     </AuthContextProvider>
   );

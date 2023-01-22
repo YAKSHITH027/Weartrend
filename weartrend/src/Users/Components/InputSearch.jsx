@@ -21,7 +21,9 @@ const InputSearch = ({ stateShow, showR, hideR }) => {
   };
   useEffect(() => {
     const id = setTimeout(() => {
-      getSearch(search);
+      if (search) {
+        getSearch(search);
+      }
     }, 500);
     return () => {
       clearTimeout(id);
