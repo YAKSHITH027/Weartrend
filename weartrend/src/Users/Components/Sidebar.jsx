@@ -42,14 +42,14 @@ export default function Sidebar() {
           <DrawerHeader>
             <Image
               src="https://i.ibb.co/Rgqq7D2/WEARTREND-1-removebg-preview.png"
-              height={"2.3rem"}
+              height={"2.9rem"}
             />
           </DrawerHeader>
 
           <DrawerBody>
             <Link to="/">
               <Heading
-                fontSize={"1.3rem"}
+                fontSize={"1.2rem"}
                 fontWeight="bold"
                 borderBottom={"1px solid"}
                 mb="1rem"
@@ -60,7 +60,7 @@ export default function Sidebar() {
             </Link>
             <Link to={"/cart"}>
               <Heading
-                fontSize={"1.3rem"}
+                fontSize={"1.2rem"}
                 fontWeight="bold"
                 borderBottom={"1px solid"}
                 mb="1rem"
@@ -71,7 +71,7 @@ export default function Sidebar() {
             </Link>
 
             <Heading
-              fontSize={"1.3rem"}
+              fontSize={"1.2rem"}
               fontWeight="bold"
               borderBottom={"1px solid"}
               mb="1rem"
@@ -98,7 +98,7 @@ export default function Sidebar() {
                     <Button>Sign In</Button>
                   </Link>
                   <Link to={"/register"}>
-                    <Button colorScheme={'pink'}>Sign Up</Button>
+                    <Button colorScheme={"twitter"}>Sign Up</Button>
                   </Link>
                 </Flex>
               )}

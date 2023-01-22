@@ -15,7 +15,7 @@ const PrivateRoutes = ({ children }) => {
       position: "top",
       isClosable: true,
     });
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/login"} />;
   }
   return children;
 };

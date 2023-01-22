@@ -22,7 +22,7 @@ const AuthContextProvider = ({ children }) => {
       let res = await signOut(auth);
       toast({
         title: "Logout Successful",
-
+        position: "top",
         status: "success",
         duration: 4000,
         isClosable: true,
@@ -30,7 +30,7 @@ const AuthContextProvider = ({ children }) => {
 
       localStorage.setItem("userData", null);
       console.log(res);
-      navigte("/login");
+      navigte("/");
     } catch (error) {
       console.log(error);
     }

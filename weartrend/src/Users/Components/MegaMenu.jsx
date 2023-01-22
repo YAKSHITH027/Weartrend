@@ -8,37 +8,39 @@ const MegaMenu = () => {
       justifyContent={"space-around"}
       flexDirection={{ base: "column", lg: "row" }}
       gap={{ base: "4" }}
-      fontSize="1.2rem"
+      fontSize={{ base: "0.9rem", mid: "1.2rem" }}
       overflow={"hidden"}
       paddingBottom="1rem"
       className="mega-menu"
     >
       <Link to="/products/womens">
-        <Heading fontSize="1.2rem">womens</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>womens</Heading>
       </Link>
       <Link to="/products/mens">
-        <Heading fontSize="1.2rem">mens</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>mens</Heading>
       </Link>
       <Link to="/products/kids">
-        <Heading fontSize="1.2rem">kids</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>kids</Heading>
       </Link>
       <Link to="/products/shoes">
-        <Heading fontSize="1.2rem">shoes</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>shoes</Heading>
       </Link>
       <Link to="/products/handbags">
-        <Heading fontSize="1.2rem">handbags</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>handbags</Heading>
       </Link>
       <Link to="/products/home">
-        <Heading fontSize="1.2rem">home</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>home</Heading>
       </Link>
       <Link to="/products/sale">
-        <Heading fontSize="1.2rem">sale</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>sale</Heading>
       </Link>
       <Link to="/products/designers">
-        <Heading fontSize="1.2rem">designers</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>
+          designers
+        </Heading>
       </Link>
       <Link to="/products/gifts">
-        <Heading fontSize="1.2rem">gifts</Heading>
+        <Heading fontSize={{ base: "0.9rem", mid: "1.2rem" }}>gifts</Heading>
       </Link>
     </Flex>
   );

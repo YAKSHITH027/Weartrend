@@ -10,7 +10,8 @@ export default class SimpleSlider extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 4000,
+      
+      autoplaySpeed: 3500,
     };
     // console.log(this.props.autoData);
     const styles = {

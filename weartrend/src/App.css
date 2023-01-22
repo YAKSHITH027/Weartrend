@@ -23,6 +23,7 @@
 .mega-menu h2 {
   color: rgb(95, 108, 108) !important;
   /* border-bottom: 2px solid; */
+  font-weight: 500;
 }
 .mega-menu h2:hover {
   color: rgb(0, 0, 0) !important;
