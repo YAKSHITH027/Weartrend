@@ -18,7 +18,7 @@ const Home = () => {
             src="https://images.bloomingdalesassets.com/is/image/BcomMedia/media/0117_0118_D_01a_v3_SALE_Incremental.jpg?scl=1&fmt=webp&wid=1440"
             width={"100%"}
             borderRadius={{ base: "5px", md: "2xl" }}
-            minH={{ base: "2rem" }}
+            minH={{ base: "3rem" }}
           ></Image>
         </Box>
         <Box marginBottom={{ base: "0.3rem", md: "1rem" }} borderRadius={"2xl"}>

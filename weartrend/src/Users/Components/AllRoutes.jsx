@@ -48,7 +48,7 @@ const AllRoutes = () => {
       />
 
       <Route
-        path="/dashboard"
+        path="/admin/dashboard"
         element={
           <Sidebar>
             <Dashboard />
@@ -56,7 +56,7 @@ const AllRoutes = () => {
         }
       />
       <Route
-        path="/orders"
+        path="/admin/orders"
         element={
           <Sidebar>
             <Orders />
@@ -64,7 +64,7 @@ const AllRoutes = () => {
         }
       />
       <Route
-        path="/messages"
+        path="/admin/messages"
         element={
           <Sidebar>
             <Messages />
@@ -72,7 +72,7 @@ const AllRoutes = () => {
         }
       />
       <Route
-        path="/user"
+        path="/admin/user"
         element={
           <Sidebar>
             <User />

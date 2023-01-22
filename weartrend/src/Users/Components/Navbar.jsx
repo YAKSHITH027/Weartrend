@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import {
   Box,
   Flex,
@@ -33,13 +33,23 @@ import { Link, NavLink } from "react-router-dom";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import Sidebar from "./Sidebar";
+import { useState } from "react";
 const Navbar = () => {
   const { logoutUser, authUser } = useContext(AuthContext);
   const {
     state: { cart, isLoading },
     dispatch,
   } = useContext(ProductContext);
-
+  const setWidth = useRef(null);
+  const [showR, setShoR] = useState(false);
+  const handleShow = () => {
+    setShoR(false);
+  };
+  const hideR = () => {
+    setTimeout(() => {
+      setShoR(true);
+    }, 100);
+  };
   return (
     <Box
       className="strict"
@@ -55,10 +65,10 @@ const Navbar = () => {
           <Box
             px="3rem"
             py="0.2rem"
-            borderBottom="1px solid grey"
+            borderBottom={!showR ? "1px solid grey" : "none"}
             bg={"white"}
             position="relative"
-            zIndex={0}
+            zIndex={10}
           >
             <Flex fontSize="1rem" color={"gray.600"}>
               <Spacer />
@@ -68,7 +78,9 @@ const Navbar = () => {
               <Box px="6px" borderRight="1px solid black">
                 shopping services
               </Box>
-              <Box px="6px">inr</Box>
+              <Box px="6px" textTransform={"uppercase"}>
+                INR
+              </Box>
             </Flex>
           </Box>
         </Hide>
@@ -81,7 +93,7 @@ const Navbar = () => {
           pos="relative"
         >
           <Flex
-            w={{ base: "9rem", md: "15rem" }}
+            w={{ base: "15rem", md: "15rem" }}
             h={"100%"}
             alignItems="center"
           >
@@ -97,18 +109,40 @@ const Navbar = () => {
           <Flex
             align={"center"}
             pos={"relative"}
-            zIndex="3443"
-            // border={"2px solid red"}
+            zIndex="10"
+            // border={"2px solid teal"}
+            width={{ base: "14rem", md: "29rem" }}
+            justifyContent={"flex-end"}
           >
             <Hide below="md">
-              <InputSearch />
+              <Flex
+                // border={"2px solid red"}
+                pos="relative"
+                zIndex="4443"
+                right="0"
+                align="center"
+                width={showR ? "29rem" : "18rem"}
+                height={"100%"}
+                // _hover={{ width: "29rem" }}
+                bg={"white"}
+                transition="all 0.5s"
+                borderBottomRadius={"1rem"}
+                justifyContent={"flex-end"}
+              >
+                <InputSearch
+                  stateShow={showR}
+                  hideR={hideR}
+                  showR={handleShow}
+                />
+              </Flex>
             </Hide>
             <Hide below="md">
               <Flex
                 // border={"1px solid black"}
                 padding="0.3rem"
                 pos={"absolute"}
-                right="15rem"
+                right="-5rem"
+                top="0.7rem"
                 paddingRight="0.7rem"
                 // zIndex={33}
                 // below="md"
@@ -117,7 +151,7 @@ const Navbar = () => {
                   <PopoverTrigger>
                     <Button>
                       <FaShoppingCart fontSize={"1.6rem"} />
-                      <Text pos="absolute" top="1px" right="1px">
+                      <Text pos="absolute" top="0.3rem" right="0.3rem">
                         {cart.length == 0 ? null : cart.length}
                       </Text>
                     </Button>
@@ -178,11 +212,13 @@ const Navbar = () => {
             <Show below="md">
               <Sidebar />
             </Show>
+          </Flex>
+          <Flex alignItems={"center"}>
             <Hide below="md">
               <Flex gap={3}>
                 {authUser ? (
                   <Menu>
-                    <MenuButton as={Button} colorScheme="pink">
+                    <MenuButton as={Button} colorScheme="blue">
                       Profile
                     </MenuButton>
                     <MenuList>
@@ -226,17 +262,26 @@ const Navbar = () => {
         <Hide below="lg">
           <MegaMenu />
         </Hide>
-        <Box
-          pos={"fixed"}
-          top="0"
-          left={"0"}
-          // width="100vw"
-          // height={"100vh"}
-          zIndex={-19}
-          // backgroundColor={"black"}
-          opacity="0.5"
-        ></Box>
+        <Hide below="md">
+          {showR && (
+            <Box
+              pos={"fixed"}
+              top="0"
+              left={"0"}
+              width="100vw"
+              height={"100vh"}
+              zIndex={9}
+              backgroundColor={"black"}
+              opacity="0.5"
+            ></Box>
+          )}
+        </Hide>
       </Box>
+      <Hide above="md">
+        <Box paddingBottom={"1"}>
+          <InputSearch stateShow={showR} hideR={hideR} showR={handleShow} />
+        </Box>
+      </Hide>
     </Box>
   );
 };
