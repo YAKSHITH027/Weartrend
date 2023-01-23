@@ -2,6 +2,8 @@ import { createContext, useContext, useReducer } from "react";
 import { filterReducer, productReducer } from "./ProductReducer";
 import { useToast } from "@chakra-ui/react";
 import { AuthContext } from "../AuthContext/AuthContext";
+import { useEffect } from "react";
+
 export const ProductContext = createContext();
 export const url = "https://backend-3ayp.onrender.com/";
 const ProductContextProvider = ({ children }) => {

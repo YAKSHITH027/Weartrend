@@ -3,6 +3,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../../Firebase";
 import { useToast } from "@chakra-ui/react";
 import { json, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ProductContext } from "../ProductContext/ProductContext";
 
 export const AuthContext = createContext();
 
@@ -17,6 +19,9 @@ const AuthContextProvider = ({ children }) => {
     setAuth(e);
     localStorage.setItem("userData", JSON.stringify(e));
   };
+
+  // console.log(state);
+  // logout user
   const logoutUser = async () => {
     try {
       let res = await signOut(auth);
@@ -30,6 +35,7 @@ const AuthContextProvider = ({ children }) => {
 
       localStorage.setItem("userData", null);
       console.log(res);
+
       navigte("/");
     } catch (error) {
       console.log(error);

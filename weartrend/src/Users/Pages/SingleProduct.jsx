@@ -64,7 +64,8 @@ const SingleProduct = () => {
           padding={"1rem"}
           justifyContent="center"
           mx="2rem"
-          height={"100vh"}
+          marginTop={"9px"}
+          height={{ base: "50vh", md: "100vh" }}
           borderWidth={"2px"}
         >
           <Image src={singleData.image} height={"90%"} borderWidth="3px" />

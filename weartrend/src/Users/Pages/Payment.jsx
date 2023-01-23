@@ -3,6 +3,7 @@ import {
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   HStack,
@@ -13,10 +14,23 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { BsBank2, BsCreditCard2FrontFill } from "react-icons/bs";
 import { FaCcAmazonPay, FaWallet } from "react-icons/fa";
 import { HiCurrencyRupee } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import {
+  nameValidate,
+  addressValidate,
+  cityValidate,
+  stateValidate,
+  pinValidate,
+  cardValidate,
+  monthValidate,
+  yearValidate,
+  cvvValidate,
+  emailValidate,
+} from "../utils";
 import Navbar from "../Components/Navbar";
 import PaymentSuccessModal from "../Components/PaymentSuccessModal";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
@@ -25,10 +39,23 @@ const Payment = () => {
   const naviagete = useNavigate();
   const {
     state: { total },
+    dispatch,
   } = useContext(ProductContext);
   const [count, setCount] = useState(5);
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit: validationSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [valid, setValid] = useState(false);
+  // VALIDATTION
+  console.log(errors);
+  const handleSubmit = () => {
+    // e.preventDefault();
+    dispatch({ type: "CLEAR_CART" });
+    // console.log("payment");
+    setValid(true);
     setInterval(() => {
       setCount((p) => p - 1);
     }, 1000);
@@ -37,6 +64,8 @@ const Payment = () => {
     }, 5000);
   };
   console.log(count);
+  console.log(valid);
+
   return (
     <Box maxW={"95vw"} margin="auto" marginBottom={"3rem"}>
       <Box>
@@ -100,53 +129,70 @@ const Payment = () => {
             p="3"
             borderRadius={"lg"}
           >
-            <form
-              onSubmit={(e) => {
-                handleSubmit(e);
-              }}
-            >
+            <form onSubmit={validationSubmit(handleSubmit)}>
               <FormControl my={"2px"}>
                 <Flex gap={"3"}>
-                  <Box>
+                  <FormControl isInvalid={errors.firstName}>
                     <FormLabel>First Name</FormLabel>
-                    <Input minLength={4} />
-                  </Box>
-                  <Box>
+                    <Input
+                      minLength={4}
+                      {...register("firstName", nameValidate)}
+                    />
+                    <FormErrorMessage>
+                      {errors.firstName?.message}
+                    </FormErrorMessage>
+                  </FormControl>
+                  <FormControl>
                     <FormLabel>Last Name</FormLabel>
                     <Input />
-                  </Box>
+                  </FormControl>
                 </Flex>
               </FormControl>
-              <FormControl mt={"9px"}>
+              <FormControl mt={"9px"} isInvalid={errors.address}>
                 <FormLabel>Address</FormLabel>
-                <Textarea resize={"none"}></Textarea>
+                <Textarea
+                  resize={"none"}
+                  {...register("address", addressValidate)}
+                ></Textarea>
+                <FormErrorMessage>{errors.address?.message}</FormErrorMessage>
               </FormControl>
               <FormControl mt={"9px"}>
                 <Flex gap={"3"}>
-                  <Box>
+                  <FormControl isInvalid={errors.city}>
                     <FormLabel>City</FormLabel>
-                    <Input minLength={2} />
-                  </Box>
-                  <Box>
-                    <FormLabel>State</FormLabel>
-                    <Input minLength={2} />
-                  </Box>
-                  <Box>
-                    <FormLabel>Pincode</FormLabel>
-                    <Input minLength={6} maxLength={6} />
-                  </Box>
+                    <Input minLength={2} {...register("city", cityValidate)} />
+                    <FormErrorMessage>{errors.city?.message}</FormErrorMessage>
+                  </FormControl>
+                  <FormControl isInvalid={errors.state}>
+                    <FormLabel>state</FormLabel>
+                    <Input
+                      minLength={2}
+                      {...register("state", stateValidate)}
+                    />
+                    <FormErrorMessage>{errors.state?.message}</FormErrorMessage>
+                  </FormControl>
+                  <FormControl isInvalid={errors.pin}>
+                    <FormLabel>pin</FormLabel>
+                    <Input type={"number"} {...register("pin", pinValidate)} />
+                    <FormErrorMessage>{errors.pin?.message}</FormErrorMessage>
+                  </FormControl>
                 </Flex>
               </FormControl>
               <FormControl mt="9px">
                 <Flex gap={"3"}>
-                  <Box>
-                    <FormLabel>Card Number</FormLabel>
-                    <Input minLength={16} maxLength="16" />
-                  </Box>
+                  <FormControl isInvalid={errors.card}>
+                    <FormLabel>card</FormLabel>
+                    <Input
+                      type={"number"}
+                      {...register("card", cardValidate)}
+                    />
+                    <FormErrorMessage>{errors.card?.message}</FormErrorMessage>
+                  </FormControl>
+
                   <Box>
                     <FormLabel>CVV</FormLabel>
                     <HStack>
-                      <PinInput minLength={3}>
+                      <PinInput type="number">
                         <PinInputField />
                         <PinInputField />
                         <PinInputField />
@@ -157,18 +203,32 @@ const Payment = () => {
               </FormControl>
               <FormControl mt="9px">
                 <Flex gap={"3"}>
-                  <Box>
-                    <FormLabel>Exp Month</FormLabel>
-                    <Input />
-                  </Box>
-                  <Box>
-                    <FormLabel>Exp Year</FormLabel>
-                    <Input />
-                  </Box>
+                  <FormControl isInvalid={errors.month}>
+                    <FormLabel>month</FormLabel>
+                    <Input
+                      type="number"
+                      minLength={2}
+                      {...register("month", monthValidate)}
+                    />
+                    <FormErrorMessage>{errors.month?.message}</FormErrorMessage>
+                  </FormControl>
+                  <FormControl isInvalid={errors.year}>
+                    <FormLabel>year</FormLabel>
+                    <Input
+                      type="number"
+                      minLength={2}
+                      {...register("year", yearValidate)}
+                    />
+                    <FormErrorMessage>{errors.year?.message}</FormErrorMessage>
+                  </FormControl>
                 </Flex>
               </FormControl>
               <Button type="submit" width={"full"} my="4">
-                <PaymentSuccessModal total={total} count={count} />
+                <PaymentSuccessModal
+                  total={total}
+                  count={count}
+                  valid={valid}
+                />
               </Button>
             </form>
           </Flex>

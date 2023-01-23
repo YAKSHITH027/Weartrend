@@ -14,12 +14,14 @@ import Rating from "../Components/Rating";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
 const Cart = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const {
     state: { cart },
     dispatch,
   } = useContext(ProductContext);
+  const { authUser } = useContext(AuthContext);
 
   useEffect(() => {
     let t = cart.reduce((acc, curr) => {

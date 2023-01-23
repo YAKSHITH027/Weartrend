@@ -17,6 +17,12 @@ export const productReducer = (state, action) => {
         isLoading: true,
       };
     }
+    case "CLEAR_CART": {
+      return {
+        ...state,
+        cart: [],
+      };
+    }
     case "INCREASE": {
       let newCart = state.cart.map((item) => {
         if (item.id == action.payload.id) {

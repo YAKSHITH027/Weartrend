@@ -15,12 +15,21 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
-const PaymentSuccessModal = ({ total, count }) => {
+const PaymentSuccessModal = ({ total, count, valid }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    handleCheck();
+  }, [valid]);
+  const handleCheck = () => {
+    // console.log("here nos", valid);
+    if (valid) {
+      onOpen();
+    }
+  };
 
   return (
     <>
-      <Button onClick={onOpen} width="full" colorScheme={"twitter"}>
+      <Button onClick={handleCheck} width="full" colorScheme={"twitter"}>
         Pay : {total}
       </Button>
 

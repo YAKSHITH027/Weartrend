@@ -21,6 +21,7 @@ import SingleProd from "../Components/SingleProd";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
 import Footer from "../Components/Footer";
 import FilterModal from "../Components/FilterModal";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
 const Products = () => {
   const setParam = (page) => {
     if (page <= 0) {
@@ -40,6 +41,7 @@ const Products = () => {
     filterData: { sort, rating, fastDelivery },
     filterDispatch,
   } = useContext(ProductContext);
+  const { authUser } = useContext(AuthContext);
   const URL = process.env.REACT_APP_JSON_KEY;
 
   // filterDispatch({ type: sort, payload: searchParam.get("sort") || "" });
@@ -49,11 +51,24 @@ const Products = () => {
   //   payload: searchParam.get("fastDelivery") || false,
   // });
 
-  let getProduct = async (category, page, sort, rating, fastDelivery) => {
-    let query = "";
-    if (sort) {
-      query += `&_sort=price&_order=${sort}`;
+  useEffect(() => {
+    let updated;
+    if (sort == "asc") {
+      updated = state.products.sort((a, b) => {
+        return a.offerPrice - b.offerPrice;
+      });
     }
+    if (sort == "desc") {
+      updated = state.products.sort((a, b) => {
+        return b.offerPrice - a.offerPrice;
+      });
+    }
+    dispatch({ type: "CATEGORY_ITEM", payload: updated });
+  }, [sort]);
+
+  let getProduct = async (category, page, rating, fastDelivery) => {
+    let query = "";
+
     if (rating) {
       query += `&ratings=${Number(rating) + 1}`;
     }
@@ -95,8 +110,8 @@ const Products = () => {
     }
     setSearchParam(obj);
 
-    getProduct(category, page, sort, rating, fastDelivery);
-  }, [category, page, sort, rating, fastDelivery]);
+    getProduct(category, page, rating, fastDelivery);
+  }, [category, page, rating, fastDelivery]);
 
   // console.log("searchhh", searchParam.get("page"));
   // console.log(total, "total");

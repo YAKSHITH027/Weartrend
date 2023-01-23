@@ -261,6 +261,7 @@ const Navbar = () => {
                       mt="4"
                       colorScheme="blue"
                       onClick={() => {
+                        dispatch({ type: "CLEAR_CART" });
                         logoutUser();
                       }}
                     >
