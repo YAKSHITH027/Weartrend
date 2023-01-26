@@ -44,8 +44,8 @@ export default class ProductSlider extends Component {
         <Slider {...settings}>
           {this.props.dataProd?.map((item) => {
             return (
-              <Link to={`/singleproduct/${item.id}`}>
-                <div key={item.id}>
+              <Link to={`/singleproduct/${item.id}`} key={item.id}>
+                <div>
                   <div>
                     <img src={item.image} width={"100%"} />
                   </div>

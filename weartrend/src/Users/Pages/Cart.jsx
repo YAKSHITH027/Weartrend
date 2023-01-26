@@ -20,16 +20,19 @@ const Cart = () => {
   const {
     state: { cart },
     dispatch,
+    removeCart,
   } = useContext(ProductContext);
   const { authUser } = useContext(AuthContext);
 
   useEffect(() => {
     let t = cart.reduce((acc, curr) => {
+      console.log(acc);
       return acc + Number(curr.price) * curr.qty;
     }, 0);
     dispatch({ type: "UPDATE_TOTAL", payload: t });
     setTotalAmount(t);
   }, [cart]);
+  console.log("cart", cart);
 
   return (
     <Box>
@@ -105,6 +108,7 @@ const Cart = () => {
                         type: "REMOVE_FROM_CART",
                         payload: item,
                       });
+                      removeCart(item);
                     }}
                   >
                     <AiFillDelete fontSize={"27px"} />

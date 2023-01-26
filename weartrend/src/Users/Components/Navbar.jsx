@@ -40,6 +40,7 @@ const Navbar = () => {
   const {
     state: { cart, isLoading },
     dispatch,
+    removeCart,
   } = useContext(ProductContext);
   const setWidth = useRef(null);
   const [showR, setShoR] = useState(false);
@@ -190,6 +191,7 @@ const Navbar = () => {
                                     type: "REMOVE_FROM_CART",
                                     payload: item,
                                   });
+                                  removeCart(item);
                                 }}
                               >
                                 <AiFillDelete fontSize={"27px"} />

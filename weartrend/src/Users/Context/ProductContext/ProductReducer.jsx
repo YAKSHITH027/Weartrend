@@ -17,6 +17,12 @@ export const productReducer = (state, action) => {
         isLoading: true,
       };
     }
+    case "INITIAL_CART": {
+      return {
+        ...state,
+        cart: [...action.payload],
+      };
+    }
     case "CLEAR_CART": {
       return {
         ...state,

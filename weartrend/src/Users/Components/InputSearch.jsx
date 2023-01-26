@@ -46,6 +46,8 @@ const InputSearch = ({ stateShow, showR, hideR }) => {
           placeholder="search"
           textTransform={"none"}
           width={"100%"}
+          bg="white"
+          zIndex={"2334"}
           p="5px 1rem"
           // border={"none"}
           // outline={"none"}

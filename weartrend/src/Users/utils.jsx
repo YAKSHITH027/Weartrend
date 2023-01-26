@@ -101,7 +101,7 @@ export const monthValidate = {
 export const yearValidate = {
   required: {
     value: true,
-    message: "Please enter your address",
+    message: "Please enter expiry year",
   },
 };
 export const cvvValidate = {

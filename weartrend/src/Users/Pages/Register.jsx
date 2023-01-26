@@ -45,6 +45,13 @@ const Register = () => {
         avatar: "",
         date: Date.now(),
       });
+      await setDoc(doc(db, "cart", res.user.uid), {
+        id: res.user.uid,
+        cart: [],
+      });
+      await setDoc(doc(db, "completed", res.user.uid), {
+        completed: [],
+      });
       console.log(res.user);
       loginUser(res.user);
       setLoading(false);

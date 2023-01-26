@@ -34,13 +34,18 @@ import {
 import Navbar from "../Components/Navbar";
 import PaymentSuccessModal from "../Components/PaymentSuccessModal";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
+import { useEffect } from "react";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../Firebase";
 
 const Payment = () => {
   const naviagete = useNavigate();
   const {
-    state: { total },
+    state: { total, cart },
     dispatch,
   } = useContext(ProductContext);
+  const { authUser } = useContext(AuthContext);
   const [count, setCount] = useState(5);
   const {
     register,
@@ -51,18 +56,49 @@ const Payment = () => {
   const [valid, setValid] = useState(false);
   // VALIDATTION
   console.log(errors);
-  const handleSubmit = () => {
+  console.log("sssssssss", authUser);
+  const handleSubmit = async (data) => {
     // e.preventDefault();
-    dispatch({ type: "CLEAR_CART" });
-    // console.log("payment");
-    setValid(true);
-    setInterval(() => {
-      setCount((p) => p - 1);
-    }, 1000);
-    setTimeout(() => {
-      naviagete("/");
-    }, 5000);
+    console.log("data form", data);
+    try {
+      let res = await getDoc(doc(db, "completed", authUser.uid));
+      let docs = res.data().completed;
+      console.log("completed", docs);
+      let productsArr = [
+        ...docs,
+        {
+          puchased: cart,
+          data,
+
+          status: "pending",
+          date: Date.now(),
+        },
+      ];
+      console.log(productsArr);
+      console.log("user", authUser.uid);
+      await updateDoc(doc(db, "completed", authUser.uid), {
+        completed: productsArr,
+      });
+      console.log(".....end");
+      await updateDoc(doc(db, "cart", authUser.uid), { cart: [] });
+      dispatch({ type: "CLEAR_CART" });
+      // console.log("payment");
+      setValid(true);
+      setInterval(() => {
+        setCount((p) => p - 1);
+      }, 1000);
+      setTimeout(() => {
+        naviagete("/");
+      }, 5000);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // let see = await getDoc(
+    //   doc(db, "completed", "9P9UKgRB1gU7UZuoatzUpsQdAbJ3")
+    // );
   };
+
   console.log(count);
   console.log(valid);
 
