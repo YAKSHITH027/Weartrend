@@ -33,7 +33,14 @@ const Orders = () => {
   console.log("main", main);
 
   return (
-    <Flex flexDir={"column"} gap="1rem" borderWidth={"1px"} p="1rem">
+    <Flex
+      flexDir={"column"}
+      gap="1rem"
+      borderWidth={"1px"}
+      p="1rem"
+      overflowY={"scroll"}
+      height={"98vh"}
+    >
       {orders.map((order) => {
         return order.completed.map((every) => {
           var date = every.date;

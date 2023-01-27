@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Loading from "../../Users/Components/Loading";
 import AddProductModal from "../Compornts/AddProductModal";
+import EditProductModal from "../Compornts/EditProductModal";
 
 const Dashboard = () => {
   const URL = process.env.REACT_APP_JSON_KEY;
@@ -175,7 +176,7 @@ const Dashboard = () => {
                 <Center width={"4rem"}>{item.price}</Center>
                 <Center>{item.quntity}</Center>
                 <Center>
-                  <Button colorScheme={"orange"}>Edit</Button>
+                  <EditProductModal item={item} get={getProducts} />
                 </Center>
                 <Center>
                   <Button

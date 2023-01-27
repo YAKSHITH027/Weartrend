@@ -39,6 +39,8 @@ const User = () => {
         borderRadius={"1rem"}
         py="2rem"
         px="4rem"
+        overflowY={"scroll"}
+        height="80vh"
       >
         <Flex justifyContent={"space-around"}>
           <Text fontSize={"1.4rem"} fontWeight="bold">

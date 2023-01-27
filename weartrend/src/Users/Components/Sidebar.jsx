@@ -58,6 +58,17 @@ export default function Sidebar() {
                 Home
               </Heading>
             </Link>
+            <Link to="/profile">
+              <Heading
+                fontSize={"1.2rem"}
+                fontWeight="bold"
+                borderBottom={"1px solid"}
+                mb="1rem"
+                pb={"5px"}
+              >
+                profile
+              </Heading>
+            </Link>
             <Link to={"/cart"}>
               <Heading
                 fontSize={"1.2rem"}

@@ -6,6 +6,7 @@ import {
   Heading,
   Image,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
@@ -23,6 +24,7 @@ const Cart = () => {
     removeCart,
   } = useContext(ProductContext);
   const { authUser } = useContext(AuthContext);
+  const toast = useToast();
 
   useEffect(() => {
     let t = cart.reduce((acc, curr) => {
@@ -104,6 +106,13 @@ const Cart = () => {
                   </Flex>
                   <Box
                     onClick={() => {
+                      toast({
+                        title: "Product is removed.",
+                        position: "top",
+                        status: "info",
+                        duration: 3000,
+                        isClosable: true,
+                      });
                       dispatch({
                         type: "REMOVE_FROM_CART",
                         payload: item,

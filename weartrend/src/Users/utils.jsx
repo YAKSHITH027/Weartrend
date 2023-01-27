@@ -81,6 +81,10 @@ export const pinValidate = {
     value: 6,
     message: "pincode must be  6 digit numbers",
   },
+  maxLength: {
+    value: 6,
+    message: "pincode must be  6 digit numbers",
+  },
 };
 export const cardValidate = {
   required: {
@@ -90,6 +94,10 @@ export const cardValidate = {
   minLength: {
     value: 16,
     message: "card number must be at least 16 digit number",
+  },
+  maxLength: {
+    value: 16,
+    message: "card number should be of 16 digit number",
   },
 };
 export const monthValidate = {

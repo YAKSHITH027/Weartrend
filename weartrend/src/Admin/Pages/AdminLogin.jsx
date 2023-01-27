@@ -30,7 +30,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   async function handleLogin(data) {
-    if (data.email.length > 5 && data.password.length > 12) {
+    if (data.email.length > 5 && data.password.length > 8) {
       toast({
         title: "login successful",
         description: "have a great day.",
