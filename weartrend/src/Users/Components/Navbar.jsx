@@ -113,7 +113,7 @@ const Navbar = () => {
           <Flex
             align={"center"}
             pos={"relative"}
-            zIndex="10"
+            // zIndex="10"
             // border={"2px solid teal"}
             width={{ base: "14rem", md: "29rem" }}
             justifyContent={"flex-end"}
@@ -122,13 +122,13 @@ const Navbar = () => {
               <Flex
                 // border={"2px solid red"}
                 pos="relative"
-                zIndex="4443"
                 right="0"
                 align="center"
                 width={showR ? "29rem" : "18rem"}
                 height={"100%"}
                 // _hover={{ width: "29rem" }}
                 bg={"white"}
+                zIndex="10"
                 transition="all 0.5s"
                 borderBottomRadius={"1rem"}
                 justifyContent={"flex-end"}
@@ -148,7 +148,7 @@ const Navbar = () => {
                 right="-5rem"
                 top="0.7rem"
                 paddingRight="0.7rem"
-                // zIndex={33}
+
                 // below="md"
               >
                 <Popover isLazy>

@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Skeleton, Stack, Text } from "@chakra-ui/react";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
@@ -42,19 +42,41 @@ export default class ProductSlider extends Component {
     return (
       <Box>
         <Slider {...settings}>
-          {this.props.dataProd?.map((item) => {
-            return (
-              <Link to={`/singleproduct/${item.id}`} key={item.id}>
-                <div>
-                  <div>
-                    <img src={item.image} width={"100%"} />
-                  </div>
-                  <Text textAlign={"center"}>{item.brand}</Text>
-                  <Text textAlign={"center"}>₹ {item.price}</Text>
-                </div>
-              </Link>
-            );
-          })}
+          {this.props.loading
+            ? [...Array(8).keys()].map((item) => {
+                return (
+                  <Stack gap="3">
+                    <Skeleton
+                      borderRadius={"2xl"}
+                      height={{ base: "200px", md: "350px" }}
+                      width={{ base: "140px", md: "240px" }}
+                    />
+                    <Skeleton
+                      borderRadius={"lg"}
+                      height={{ base: "10px", md: "10px" }}
+                      width={{ base: "140px", md: "240px" }}
+                    />
+                    <Skeleton
+                      borderRadius={"lg"}
+                      height={{ base: "10px", md: "10px" }}
+                      width={{ base: "140px", md: "240px" }}
+                    />
+                  </Stack>
+                );
+              })
+            : this.props.dataProd?.map((item) => {
+                return (
+                  <Link to={`/singleproduct/${item.id}`} key={item.id}>
+                    <div>
+                      <div>
+                        <img src={item.image} width={"100%"} />
+                      </div>
+                      <Text textAlign={"center"}>{item.brand}</Text>
+                      <Text textAlign={"center"}>₹ {item.price}</Text>
+                    </div>
+                  </Link>
+                );
+              })}
         </Slider>
       </Box>
     );

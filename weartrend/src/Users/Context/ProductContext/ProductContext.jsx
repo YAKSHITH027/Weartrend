@@ -22,7 +22,7 @@ const ProductContextProvider = ({ children }) => {
   const initialCart = async () => {
     try {
       let res = await getDoc(doc(db, "cart", authUser.uid));
-      console.log("initial", res.data());
+      // console.log("initial", res.data());
       dispatch({ type: "INITIAL_CART", payload: res.data().cart });
     } catch (error) {
       console.log(error);
@@ -30,7 +30,7 @@ const ProductContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log("auth,user,use", authUser);
+    // console.log("auth,user,use", authUser);
     if (authUser) {
       initialCart();
     }

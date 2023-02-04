@@ -68,7 +68,7 @@ export default function EditProductModal({ item, get }) {
       });
       setLoading(false);
       onClose();
-      console.log(res);
+      // console.log(res);
       get();
       toast({
         title: "Product is edited",

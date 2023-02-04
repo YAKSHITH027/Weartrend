@@ -1,5 +1,14 @@
 import { Search2Icon } from "@chakra-ui/icons";
-import { Box, Flex, Image, Input, Text, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Image,
+  Input,
+  Text,
+  Link,
+  Skeleton,
+  Stack,
+} from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { VscSearch } from "react-icons/vsc";
@@ -8,15 +17,23 @@ import { Link as Rout } from "react-router-dom";
 const InputSearch = ({ stateShow, showR, hideR }) => {
   const dropResult = useRef(null);
   const [search, setSearch] = useState("");
+  const [isLoading, setLoading] = useState(false);
   let [result, setResult] = useState([]);
 
   const getSearch = async (search) => {
     try {
-      let res = await fetch(`${process.env.REACT_APP_JSON_KEY}?q=${search}`);
+      setLoading(true);
+      let res = await fetch(
+        `${process.env.REACT_APP_JSON_KEY}?q=${search}&_limit=10`
+      );
       let data = await res.json();
+
       setResult(data);
+      setLoading(false);
+      console.log(data);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -30,7 +47,8 @@ const InputSearch = ({ stateShow, showR, hideR }) => {
     };
   }, [search]);
 
-  console.log(result);
+  // console.log(result);
+  console.log("loading", isLoading, result);
 
   return (
     <div>
@@ -52,8 +70,11 @@ const InputSearch = ({ stateShow, showR, hideR }) => {
           // border={"none"}
           // outline={"none"}
           onFocus={() => {
-            // dropResult.current.style.height = "auto";
-            // dropResult.current.style.padding = "auto";
+            if (search.length) {
+              // dropResult.current.style.height = "18rem";
+              // dropResult.current.style.padding = "5px";
+            }
+            //
             hideR();
           }}
           onBlur={() => {
@@ -63,6 +84,8 @@ const InputSearch = ({ stateShow, showR, hideR }) => {
           }}
           onChange={(e) => {
             setSearch(e.target.value);
+            // dropResult.current.style.height = "18rem";
+            // dropResult.current.style.padding = "5px";
           }}
           // borderBottom="1px solid black"
         />
@@ -89,7 +112,14 @@ const InputSearch = ({ stateShow, showR, hideR }) => {
             },
           }}
         >
-          {search.length != 0 &&
+          {isLoading ? (
+            <Stack>
+              {[...Array(7).keys()].map((item, index) => {
+                return <Skeleton key={index} height="30px" width="full" />;
+              })}
+            </Stack>
+          ) : (
+            search.length != 0 &&
             result.map((item) => {
               return (
                 <Link
@@ -102,6 +132,7 @@ const InputSearch = ({ stateShow, showR, hideR }) => {
                 >
                   <Flex
                     flexDirection={"row"}
+                    className="fix"
                     justifyContent="space-around"
                     align={"center"}
                     borderWidth={"1px"}
@@ -129,7 +160,8 @@ const InputSearch = ({ stateShow, showR, hideR }) => {
                   </Flex>
                 </Link>
               );
-            })}
+            })
+          )}
         </Flex>
       </Flex>
     </div>

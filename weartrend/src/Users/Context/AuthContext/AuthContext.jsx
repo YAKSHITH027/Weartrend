@@ -14,7 +14,7 @@ const AuthContextProvider = ({ children }) => {
   );
   const navigte = useNavigate();
   const toast = useToast();
-  console.log(authUser);
+  // console.log(authUser);
   const loginUser = (e) => {
     setAuth(e);
     localStorage.setItem("userData", JSON.stringify(e));
@@ -34,7 +34,7 @@ const AuthContextProvider = ({ children }) => {
       });
 
       localStorage.setItem("userData", null);
-      console.log(res);
+      // console.log(res);
 
       navigte("/");
     } catch (error) {

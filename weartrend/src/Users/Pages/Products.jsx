@@ -10,6 +10,8 @@ import {
   Hide,
   Image,
   Show,
+  Skeleton,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
@@ -31,6 +33,7 @@ const Products = () => {
   };
   const [isLoading, setLoading] = useState(false);
   const [searchParam, setSearchParam] = useSearchParams();
+  const [sortTracker, setsortTracker] = useState(true);
 
   const [page, setPage] = useState(setParam(searchParam.get("page")) || 1);
   const [total, setTotal] = useState(null);
@@ -50,7 +53,9 @@ const Products = () => {
   //   type: fastDelivery,
   //   payload: searchParam.get("fastDelivery") || false,
   // });
-
+  const refresh = () => {
+    setsortTracker(!sortTracker);
+  };
   useEffect(() => {
     let updated;
     if (sort == "asc") {
@@ -89,8 +94,7 @@ const Products = () => {
       console.log(error);
     }
   };
-  console.log("sort value from p", sort);
-  console.log(state.products);
+
   useEffect(() => {
     setPage(1);
   }, [category]);
@@ -111,17 +115,22 @@ const Products = () => {
     setSearchParam(obj);
 
     getProduct(category, page, rating, fastDelivery);
-  }, [category, page, rating, fastDelivery]);
-
+  }, [category, page, rating, fastDelivery, sortTracker]);
+  console.log("state", state);
   // console.log("searchhh", searchParam.get("page"));
   // console.log(total, "total");
-  if (isLoading) return <Loading />;
+  // if (isLoading)
+  //   return (
+  //     <Stack>
+  //       <Skeleton height="300px" width="180px" />
+  //     </Stack>
+  //   );
   // if (state.products.length == 0) return "no match found";
   return (
     <Box>
       <Navbar />
       <Show breakpoint="(max-width: 992px)">
-        <FilterModal />
+        <FilterModal refresh={refresh} />
       </Show>
       <Flex
         minH={"95vh"}
@@ -130,7 +139,13 @@ const Products = () => {
         mx="5px"
       >
         <Hide below="lg">
-          <Flex width={"20%"} flexDirection={"column"} align="center" h="90vh">
+          <Flex
+            width={"20%"}
+            flexDirection={"column"}
+            align="center"
+            h="90vh"
+            // border={"2px solid"}
+          >
             <Badge
               variant={"outline"}
               fontSize={"1.7rem"}
@@ -140,10 +155,54 @@ const Products = () => {
               filters
             </Badge>
 
-            <Filter />
+            <Filter refresh={refresh} />
           </Flex>
         </Hide>
-        {state.products.length == 0 ? (
+        {isLoading ? (
+          <Grid
+            width={{ base: "100%", lg: "70%" }}
+            height={"90vh"}
+            // border="2px solid green"
+            borderRadius="2xl"
+            borderWidth={"2px"}
+            templateColumns={{
+              base: "repeat(2, 1fr)",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+              lg: "repeat(4, 1fr)",
+            }}
+            gap={2}
+            overflowY="scroll"
+            padding="5"
+            sx={{
+              "::-webkit-scrollbar": {
+                display: "none",
+              },
+            }}
+          >
+            {[...Array(8).keys()].map((item, index) => {
+              return (
+                <Stack
+                  borderWidth={"2px"}
+                  borderRadius={"8px"}
+                  padding="8px"
+                  minH={{ base: "auto", md: "25rem" }}
+                  key={index}
+                >
+                  <Skeleton
+                    margin="auto"
+                    width="100%"
+                    height={{ base: "170", md: "270px" }}
+                    borderRadius="lg"
+                  />
+                  <Skeleton height="20px" width="full" />
+                  <Skeleton height="20px" width="full" />
+                  <Skeleton height="20px" width="full" />
+                </Stack>
+              );
+            })}
+          </Grid>
+        ) : state.products?.length == 0 ? (
           <Flex
             width={{ base: "100%", lg: "70%" }}
             height={"80vh"}
@@ -200,7 +259,7 @@ const Products = () => {
           <Text padding={4}>{page}</Text>
           <Button
             isDisabled={
-              Math.ceil(total / 12) == page || state.products.length == 0
+              Math.ceil(total / 12) == page || state.products?.length == 0
             }
             onClick={() => {
               setPage(page + 1);

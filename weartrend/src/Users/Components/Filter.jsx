@@ -12,7 +12,7 @@ import React, { useContext, useRef, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { ProductContext } from "../Context/ProductContext/ProductContext";
 import Rating from "./Rating";
-const Filter = () => {
+const Filter = ({ refresh }) => {
   const { filterData, filterDispatch } = useContext(ProductContext);
   console.log({ filterData });
 
@@ -69,6 +69,7 @@ const Filter = () => {
         width="full"
         colorScheme={"blue"}
         onClick={() => {
+          refresh();
           filterDispatch({ type: "RESET" });
         }}
       >

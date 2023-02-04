@@ -11,19 +11,21 @@ import { useEffect } from "react";
 
 const Home = () => {
   //   console.log(autoImage);
-
+  const [isLoading, setLoading] = useState(false);
   const [womensData, setWomensData] = useState([]);
   const [mensData, setMensData] = useState([]);
 
   let getData = async (category) => {
+    setLoading(true);
     let res = await fetch(
-      `${process.env.REACT_APP_JSON_KEY}?${category}&_limit=16`
+      `${process.env.REACT_APP_JSON_KEY}?category=${category}&_limit=16`
     );
     let data = await res.json();
+    setLoading(false);
     setWomensData(data);
   };
   useEffect(() => {
-    getData("womens");
+    getData("mens");
   }, []);
   let arr1 = womensData.slice(0, 8);
   let arr2 = womensData.slice(8, 15);
@@ -57,7 +59,7 @@ const Home = () => {
             RECOMMENDED FOR YOU
           </Heading>
           <Box>
-            <ProductSlider dataProd={arr1} />
+            <ProductSlider dataProd={arr1} loading={isLoading} />
           </Box>
         </Box>
         <Flex
@@ -98,7 +100,7 @@ const Home = () => {
           >
             DESIGNER BOUTIQUE
           </Heading>
-          <ProductSlider dataProd={arr2} />
+          <ProductSlider dataProd={arr2} loading={isLoading} />
         </Box>
         <Hide below="md">
           <Box>

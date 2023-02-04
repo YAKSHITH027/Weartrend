@@ -25,7 +25,9 @@ const SingleProd = ({ prodData }) => {
           // border={"2px solid red"}
         />
         <Text py={"1"}>{prodData.brand}</Text>
-        <Text height={"3rem"}>{prodData.title}</Text>
+        <Text height={{ base: "2.5rem", md: "1.5rem" }}>
+          {prodData.title.substring(0, 20)}
+        </Text>
         <Text>
           <Flex align={"center"}>
             <Rating rating={prodData.ratings} />
@@ -33,9 +35,7 @@ const SingleProd = ({ prodData }) => {
             <Text marginLeft={"1"}> {prodData.totalRatings}</Text>
           </Flex>
           <Text paddingBottom={"2px"}>
-            {prodData.fastDelivery
-              ? "Fast Delivery Available"
-              : "Delivery in 4 days"}
+            {prodData.fastDelivery ? "Fast Delivery" : "Delivery in 4 days"}
           </Text>
           <Badge colorScheme="green" fontSize="1rem" mr={2}>
             INR {prodData.offerPrice}

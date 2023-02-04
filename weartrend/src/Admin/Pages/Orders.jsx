@@ -17,7 +17,7 @@ const Orders = () => {
   useEffect(() => {
     getCol();
   }, []);
-  console.log("only ordersssss", orders);
+  // console.log("only ordersssss", orders);
 
   // masagging
 

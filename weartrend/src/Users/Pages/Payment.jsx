@@ -55,11 +55,11 @@ const Payment = () => {
   } = useForm();
   const [valid, setValid] = useState(false);
   // VALIDATTION
-  console.log(errors);
-  console.log("sssssssss", authUser);
+  // console.log(errors);
+  // console.log("sssssssss", authUser);
   const handleSubmit = async (data) => {
     // e.preventDefault();
-    console.log("data form", data);
+    // console.log("data form", data);
     try {
       let res = await getDoc(doc(db, "completed", authUser.uid));
       let docs = res.data().completed;
@@ -74,12 +74,12 @@ const Payment = () => {
           date: Date.now(),
         },
       ];
-      console.log(productsArr);
-      console.log("user", authUser.uid);
+      // console.log(productsArr);
+      // console.log("user", authUser.uid);
       await updateDoc(doc(db, "completed", authUser.uid), {
         completed: productsArr,
       });
-      console.log(".....end");
+      // console.log(".....end");
       await updateDoc(doc(db, "cart", authUser.uid), { cart: [] });
       dispatch({ type: "CLEAR_CART" });
       // console.log("payment");
@@ -99,8 +99,8 @@ const Payment = () => {
     // );
   };
 
-  console.log(count);
-  console.log(valid);
+  // console.log(count);
+  // console.log(valid);
 
   return (
     <Box maxW={"95vw"} margin="auto" marginBottom={"3rem"}>
