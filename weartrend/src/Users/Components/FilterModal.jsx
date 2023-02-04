@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Filter from "./Filter";
-export default function BasicUsage() {
+export default function BasicUsage({ refresh }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -36,7 +36,7 @@ export default function BasicUsage() {
           <ModalHeader>Filters</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Filter />
+            <Filter refresh={refresh} />
           </ModalBody>
 
           <ModalFooter>
