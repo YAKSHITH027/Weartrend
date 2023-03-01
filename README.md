@@ -35,19 +35,22 @@
 
 Search for items by name or brand ,Login,Sign up,Cart, Payment, Filter, Sorting and Pagination 
 <br/><br/>
+<h3>Products Page</h3>
 <div width="100%">
 <img  src="https://github.com/YAKSHITH027/store-img/blob/master/WearTrend/Screenshot%20(954).png"/>
 </div>
 
 <br/><br/>
+<h3>SingleProduct Page</h3>
 <div width="100%">
 <img  src="https://github.com/YAKSHITH027/store-img/blob/master/WearTrend/Screenshot%20(955).png"/>
 </div>
 <br/><br/>
-
+<h3>Cart Page</h3>
 <div width="100%">
 <img  src="https://github.com/YAKSHITH027/store-img/blob/master/WearTrend/Screenshot%20(956).png"/>
 </div>
+<h3>Payments Page</h3>
 <div width="100%">
 <img  src="https://github.com/YAKSHITH027/store-img/blob/master/WearTrend/Screenshot%20(957).png"/>
 </div>
